@@ -3,7 +3,7 @@ name: Deploy site to GitHub Pages
 
 on:
   push:
-    branches: [main, claude/resume-interrupted-conversations-6luw0s]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
