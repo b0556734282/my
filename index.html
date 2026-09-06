@@ -1,311 +1,411 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="he" dir="rtl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-<!-- ========= לעריכה: שם העמותה ותיאור קצר (מופיע בגוגל ובכותרת הדפדפן) ========= -->
-<title>עמותת תורת שלום | הפצת תורה, חינוך וקירוב לבבות</title>
-<meta name="description" content="עמותת תורת שלום פועלת להפצת תורה, לחינוך ילדים ולקירוב רחוקים — כולל אברכים, חיידר, מדרשיית קירוב ושיעורי הכנה לבר מצווה.">
-<meta name="theme-color" content="#12325a">
-
-<!-- שיתוף ברשתות ובוואטסאפ -->
-<meta property="og:type" content="website">
-<meta property="og:locale" content="he_IL">
-<meta property="og:title" content="עמותת תורת שלום">
-<meta property="og:description" content="הפצת תורה, חינוך וקירוב לבבות — שותפים לזכות הרבים.">
-<meta property="og:image" content="assets/img/og-image.jpg">
-
+<title>מרכז תורה וחסד — כוללים, מבחנים, קירוב וחסד</title>
+<meta name="description" content="מרכז תורה וחסד — כוללים לאברכים, מבחנים בבין הזמנים, עידוד חזרה על הלימוד, קירוב רחוקים, ביקור חולים וקו המענה על כל חלקי התורה.">
+<meta name="theme-color" content="#5A1225">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/logo.jpg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="מרכז תורה וחסד">
+<meta property="og:title" content="מרכז תורה וחסד — עולם חסד יבנה">
+<meta property="og:description" content="כוללים לאברכים, מבחנים בבין הזמנים, עידוד חזרה על הלימוד, קירוב רחוקים, ביקור חולים וקו המענה על כל חלקי התורה.">
+<meta property="og:image" content="assets/logo.jpg">
+<meta property="og:locale" content="he_IL">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&family=Frank+Ruhl+Libre:wght@500;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700;900&family=Assistant:wght@400;600;700&family=David+Libre:wght@400;500&display=swap">
+<style>
+  :root {
+    --paper:      #FAF6EE;
+    --surface:    #F2EADC;
+    --ink:        #241C18;
+    --ink-soft:   #5F5348;
+    --rule:       #DDD0BC;
+    --wine:       #7A1B33;
+    --wine-deep:  #5A1225;
+    --gold:       #A57C2E;
+    --gold-lit:   #C9A24E;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:    #14100D;
+      --surface:  #1E1813;
+      --ink:      #F1E8DA;
+      --ink-soft: #AB9C89;
+      --rule:     #342A22;
+      --wine:     #D98395;
+      --wine-deep:#3A0C18;
+      --gold:     #D8AE5C;
+      --gold-lit: #E7C77E;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:    #14100D;
+    --surface:  #1E1813;
+    --ink:      #F1E8DA;
+    --ink-soft: #AB9C89;
+    --rule:     #342A22;
+    --wine:     #D98395;
+    --wine-deep:#3A0C18;
+    --gold:     #D8AE5C;
+    --gold-lit: #E7C77E;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    direction: rtl;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Assistant", "Segoe UI", system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.75;
+    margin: 0;
+  }
+
+  .wrap { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+  /* ===== כותר הארגון ===== */
+  .crest {
+    background: var(--wine-deep);
+    background-image:
+      repeating-linear-gradient(115deg, rgba(255,255,255,.045) 0 2px, transparent 2px 7px);
+    text-align: center;
+    padding: 30px 24px 26px;
+    border-bottom: 3px solid var(--gold);
+  }
+  .crest img { width: 96px; height: auto; display: block; margin: 0 auto 12px; }
+  .crest .name {
+    font-family: "Frank Ruhl Libre", Georgia, serif;
+    font-weight: 900;
+    font-size: 30px;
+    color: #F6E9C8;
+    letter-spacing: .02em;
+    margin: 0;
+  }
+  .crest .motto {
+    font-family: "David Libre", serif;
+    color: var(--gold-lit);
+    font-size: 16px;
+    letter-spacing: .06em;
+    margin: 4px 0 0;
+  }
+
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+  }
+
+  /* ===== פתיח ===== */
+  .hero { padding: 46px 0 40px; }
+  .eyebrow {
+    font-family: "David Libre", serif;
+    color: var(--gold);
+    font-size: 17px;
+    letter-spacing: .05em;
+    margin: 0 0 14px;
+  }
+  h1 {
+    font-family: "Frank Ruhl Libre", Georgia, serif;
+    font-weight: 900;
+    font-size: clamp(36px, 6vw, 58px);
+    line-height: 1.14;
+    text-wrap: balance;
+    margin: 0 0 20px;
+  }
+  .lede { max-width: 48ch; font-size: 19px; color: var(--ink-soft); margin: 0 0 28px; }
+  .lede strong { color: var(--ink); font-weight: 700; }
+
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+  .btn {
+    display: inline-block; padding: 12px 26px;
+    font-size: 16px; font-weight: 700; text-decoration: none;
+    border: 1px solid var(--wine); background: var(--wine); color: #FDF7EC;
+  }
+  .btn:hover { background: transparent; color: var(--wine); }
+  .btn.ghost { background: transparent; color: var(--wine); border-color: var(--rule); }
+  .btn.ghost:hover { border-color: var(--wine); }
+
+  /* ===== רצועת תמונות ===== */
+  .strip {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+  .strip figure { margin: 0; overflow: hidden; }
+  .strip img { width: 100%; height: 210px; object-fit: cover; display: block; }
+
+  /* ===== מפעלות ===== */
+  section { padding: 48px 0; border-top: 1px solid var(--rule); }
+  .section-head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 30px; }
+  h2 {
+    font-family: "Frank Ruhl Libre", Georgia, serif;
+    font-weight: 700; font-size: 31px; margin: 0; text-wrap: balance;
+  }
+  .section-head .note { font-size: 14px; color: var(--ink-soft); letter-spacing: .05em; }
+
+  .entry {
+    display: grid;
+    grid-template-columns: minmax(0,1fr) 190px;
+    gap: 8px 36px;
+    padding: 26px 0;
+    border-top: 1px solid var(--rule);
+  }
+  .entry:first-of-type { border-top: none; padding-top: 0; }
+  .tag { font-size: 12.5px; font-weight: 700; letter-spacing: .1em; color: var(--gold); margin: 0 0 4px; }
+  h3 {
+    font-family: "Frank Ruhl Libre", Georgia, serif;
+    font-weight: 700; font-size: 25px; line-height: 1.3; margin: 0 0 8px;
+  }
+  .entry p { margin: 0; color: var(--ink-soft); max-width: 58ch; }
+  .meta {
+    font-size: 15px; color: var(--ink-soft);
+    border-inline-start: 2px solid var(--rule);
+    padding-inline-start: 16px; align-self: start;
+  }
+  .meta .k { color: var(--ink); font-weight: 700; font-size: 13px; letter-spacing: .05em; }
+
+  figure.wide { margin: 26px 0 0; }
+  figure.wide img { width: 100%; height: auto; display: block; }
+  figure.wide figcaption {
+    font-size: 14px; color: var(--ink-soft); padding-top: 8px;
+    border-top: 1px solid var(--rule); margin-top: 8px;
+  }
+
+  /* ===== ציטוט ===== */
+  .quote { background: var(--surface); padding: 42px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .quote p {
+    font-family: "David Libre", serif;
+    font-size: clamp(21px, 3.2vw, 28px); line-height: 1.6;
+    max-width: 36ch; margin: 0 auto; text-align: center; text-wrap: balance;
+  }
+  .quote cite {
+    display: block; margin-top: 14px; font-family: "Assistant", sans-serif;
+    font-style: normal; font-size: 14px; letter-spacing: .07em; color: var(--gold); text-align: center;
+  }
+
+  /* ===== תרומה ===== */
+  .support {
+    background: var(--wine-deep);
+    background-image: repeating-linear-gradient(115deg, rgba(255,255,255,.04) 0 2px, transparent 2px 7px);
+    color: #F6E9C8;
+    padding: 46px 0;
+    border: none;
+  }
+  .support h2 { color: #F6E9C8; }
+  .support p { color: #E4CFAE; max-width: 46ch; }
+  .support .btn { background: var(--gold-lit); border-color: var(--gold-lit); color: #2A1008; }
+  .support .btn:hover { background: transparent; color: #F6E9C8; }
+
+  /* ===== קשר ===== */
+  .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px,1fr)); gap: 26px 36px; }
+  .contact-grid h4 { font-size: 13px; letter-spacing: .09em; color: var(--gold); margin: 0 0 6px; font-weight: 700; }
+  .contact-grid p { margin: 0; }
+  .contact-grid a { color: var(--ink); text-decoration-color: var(--rule); text-underline-offset: 4px; }
+  .contact-grid a:hover { color: var(--wine); }
+  .big-tel {
+    font-family: "Frank Ruhl Libre", Georgia, serif;
+    font-size: 27px; font-weight: 700; direction: ltr;
+    display: inline-block; font-variant-numeric: tabular-nums;
+  }
+
+  footer {
+    border-top: 1px solid var(--rule);
+    padding: 24px 0 46px; font-size: 14px; color: var(--ink-soft);
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;
+  }
+
+  @media (max-width: 700px) {
+    .entry { grid-template-columns: 1fr; gap: 14px; }
+    .meta { border-inline-start: none; border-top: 1px solid var(--rule); padding: 10px 0 0; }
+    .strip { grid-template-columns: 1fr 1fr; }
+    .strip figure:first-child { grid-column: 1 / -1; }
+    .strip img { height: 170px; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
 </head>
 <body>
+<div class="crest">
+  <img src="assets/logo.jpg" alt="סמל מרכז תורה וחסד">
+  <p class="name">מרכז תורה וחסד</p>
+  <p class="motto">עולם חסד יבנה</p>
+</div>
 
-<a class="skip-link" href="#main">דילוג לתוכן הראשי</a>
-
-<!-- ==================== תפריט עליון ==================== -->
-<header class="site-header" id="siteHeader">
-  <div class="wrap header-inner">
-    <a class="brand" href="#top">
-      <span class="brand-mark" aria-hidden="true">ת"ש</span>
-      <span class="brand-text">
-        <strong>עמותת תורת שלום</strong>
-        <small>הפצת תורה • חינוך • קירוב</small>
-      </span>
-    </a>
-
-    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mainNav" aria-label="פתיחת תפריט">
-      <span></span><span></span><span></span>
-    </button>
-
-    <nav class="main-nav" id="mainNav" aria-label="ניווט ראשי">
-      <ul>
-        <li><a href="#about">אודות</a></li>
-        <li><a href="#activities">הפעילות שלנו</a></li>
-        <li><a href="#impact">במספרים</a></li>
-        <li><a href="#gallery">גלריה</a></li>
-        <li><a href="#contact">צור קשר</a></li>
-        <li><a class="btn btn-gold btn-sm" href="#donate">לתרומה</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
-
-<main id="main">
-
-<!-- ==================== כותרת ראשית ==================== -->
-<section class="hero" id="top">
-  <div class="hero-bg" aria-hidden="true"></div>
-  <div class="wrap hero-inner">
-    <p class="eyebrow reveal">עמותה רשומה • מס' עמותה 58-0000000</p>
-    <h1 class="reveal">מגדילים תורה<br><span class="gold">ומאדירים לבבות</span></h1>
-    <p class="lead reveal">
-      אנחנו מלווים ילדים, בחורים ואברכים בדרך אל התורה — מהחיידר ועד הכולל,
-      ומהשיעור הראשון ועד לבית של תורה. כל תרומה הופכת לשעת לימוד.
+<div class="wrap">
+  <div class="hero">
+    <p class="eyebrow">במפעלות רבבות</p>
+    <h1>כוללים, קירוב, מבחנים<br>וחסד — כל יום מחדש</h1>
+    <p class="lede">
+      <strong>עשרות אברכים</strong> שוקדים על תלמודם בכוללי המרכז, מאות בחורים ואברכים ניגשים
+      למבחנים בבין הזמנים, וצעירים רחוקים מתקרבים בחברותא אישית — לצד ביקורי חולים
+      ועידוד חזרה על הלימוד.
     </p>
-    <div class="hero-cta reveal">
-      <a class="btn btn-gold" href="#donate">אני רוצה לתרום</a>
-      <a class="btn btn-ghost" href="#activities">לפעילות שלנו</a>
+    <div class="actions">
+      <a class="btn" href="#kesher">דברו איתנו</a>
+      <a class="btn ghost" href="#tmicha">להיות שותף</a>
     </div>
   </div>
-</section>
+</div>
 
-<!-- ==================== אודות ==================== -->
-<section class="section" id="about">
-  <div class="wrap grid-2">
-    <div class="reveal">
-      <p class="eyebrow">מי אנחנו</p>
-      <h2>עמותה שנולדה מתוך שטח, לא מתוך משרד</h2>
-      <p>
-        עמותת תורת שלום קמה מתוך שנים של פעילות יומיומית בשטח — בחיידר, בבית המדרש
-        ובמדרשיות הקירוב. ראינו ילד אחד שאין לו מי שילמד איתו, ובחור אחד שמחפש בית,
-        והבנו שצריך מסגרת שתיתן מענה אמיתי ומסודר.
-      </p>
-      <p>
-        מאז אנחנו מפעילים מסגרות לימוד קבועות, מלווים משפחות, ומחזיקים כולל אברכים
-        שמקיים סדרי לימוד רצופים. הכול נעשה בשקיפות מלאה, בליווי רבנים, ובאחריות
-        כלפי כל שקל שנתרם.
-      </p>
-      <ul class="checklist">
-        <li>ניהול שקוף ודיווח שנתי לתורמים</li>
-        <li>ליווי הלכתי ורוחני של רבני העמותה</li>
-        <li>כל התרומות מוקדשות ישירות לפעילות</li>
-      </ul>
-    </div>
-    <div class="about-card reveal">
-      <blockquote>
-        <p>"והגית בו יומם ולילה"</p>
-        <cite>יהושע א׳, ח׳</cite>
-      </blockquote>
-      <div class="about-card-body">
-        <h3>החזון שלנו</h3>
-        <p>
-          שכל ילד יקבל את ההזדמנות ללמוד, שכל אברך יוכל להתמסר לתורה בלי דאגות פרנסה,
-          ושכל יהודי שמחפש דרך — ימצא דלת פתוחה.
-        </p>
-      </div>
-    </div>
+<div class="wrap">
+  <div class="strip">
+    <figure><img loading="lazy" decoding="async" src="assets/kollel.jpg" alt="אברכים לומדים בבית המדרש"></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/mivchanim.jpg" alt="מעמד מבחנים לבחורים"></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/kiruv.jpg" alt="לימוד בחברותא במסגרת הקירוב"></figure>
   </div>
-</section>
+</div>
 
-<!-- ==================== פעילויות ==================== -->
-<section class="section section-alt" id="activities">
+<section id="mifalot">
   <div class="wrap">
-    <header class="section-head reveal">
-      <p class="eyebrow">מה אנחנו עושים</p>
-      <h2>הפעילות שלנו</h2>
-      <p class="section-sub">שש מסגרות שפועלות במקביל, כל ימות השבוע.</p>
-    </header>
-
-    <div class="cards">
-      <article class="card reveal">
-        <div class="card-icon" aria-hidden="true">📖</div>
-        <h3>כולל אברכים</h3>
-        <p>סדרי לימוד קבועים לאברכים, עם מלגות חודשיות שמאפשרות התמסרות מלאה ללימוד.</p>
-      </article>
-
-      <article class="card reveal">
-        <div class="card-icon" aria-hidden="true">🎒</div>
-        <h3>חיידר תורת שלום</h3>
-        <p>מסגרת חינוכית חמה לילדים, עם צוות מלמדים מסור וליווי אישי לכל ילד.</p>
-      </article>
-
-      <article class="card reveal">
-        <div class="card-icon" aria-hidden="true">🕯️</div>
-        <h3>מדרשיית קירוב</h3>
-        <p>שיעורים ומפגשים שבועיים לנוער ולמבוגרים, בסביבה נעימה ובגובה העיניים.</p>
-      </article>
-
-      <article class="card reveal">
-        <div class="card-icon" aria-hidden="true">🎓</div>
-        <h3>שיעורי הכנה לבר מצווה</h3>
-        <p>תוכנית מסודרת שמכינה את הילד להנחת תפילין, לקריאה בתורה ולכניסה לעול מצוות.</p>
-      </article>
-
-      <article class="card reveal">
-        <div class="card-icon" aria-hidden="true">📞</div>
-        <h3>קו מענה תורני</h3>
-        <p>מענה אנושי על כל חלקי התורה, 24 שעות ביממה (מלבד שבת) — לכל שואל ומתעניין.</p>
-      </article>
-
-      <article class="card reveal">
-        <div class="card-icon" aria-hidden="true">⏰</div>
-        <h3>מערכת התרעות זמני היום</h3>
-        <p>התרעות חכמות על זמני היום ההלכתיים, כדי שאף זמן תפילה לא יתפספס.</p>
-      </article>
+    <div class="section-head">
+      <h2>המפעלות</h2>
+      <span class="note">ששה מפעלים פעילים</span>
     </div>
+
+    <article class="entry">
+      <div>
+        <p class="tag">לימוד</p>
+        <h3>כוללים לאברכים</h3>
+        <p>עשרות אברכים חשובים שוקדים על תלמודם מדי יום ביומו במסגרת הכוללים, בסדרים קבועים ובמעמדי סיום על מסכתות.</p>
+      </div>
+      <div class="meta">
+        <div><span class="k">היקף</span></div>
+        <div>עשרות אברכים</div>
+        <div><span class="k">מסגרת</span></div>
+        <div>סדרים קבועים, כולל בוקר</div>
+      </div>
+    </article>
+
+    <figure class="wide">
+      <img loading="lazy" decoding="async" src="assets/siyum.jpg" alt="מעמד סיום מסכת">
+      <figcaption>מעמד הסיום על מסכת ביצה — „דכי חזינא צורבא מרבנן דשלים מסכתיה, עבידנא יומא טבא לרבנן”</figcaption>
+    </figure>
+
+    <article class="entry" style="border-top:1px solid var(--rule); margin-top:26px;">
+      <div>
+        <p class="tag">חזרה</p>
+        <h3>עידוד חזרה</h3>
+        <p>מפעל שנועד להפוך את החזרה על הלימוד לדבר קבוע — מעקב, עידוד ומענקים לחוזרים על תלמודם, כדי שהלימוד יישאר ולא יישכח.</p>
+      </div>
+      <div class="meta">
+        <div><span class="k">קהל</span></div>
+        <div>אברכים ובחורים</div>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div>
+        <p class="tag">מבחנים</p>
+        <h3>מבחנים בבין הזמנים</h3>
+        <p>„שיהיו דברי תורה מחודדין בפיך” — עשרות בחורי חמד ואברכים ניגשים למבחנים על דפי גמרא ורש״י בימי בין הזמנים, עם פרסים ומעמדי חלוקה.</p>
+      </div>
+      <div class="meta">
+        <div><span class="k">מועד</span></div>
+        <div>בין הזמנים</div>
+        <div><span class="k">חומר</span></div>
+        <div>גמרא ורש״י</div>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div>
+        <p class="tag">קירוב</p>
+        <h3>קירוב רחוקים</h3>
+        <p>חברותות אישיות ושיעורים לצעירים רחוקים מתורה ומצוות, במסגרות קבועות באזור המרכז — קשר אישי לאורך זמן, לא מפגש חד־פעמי.</p>
+      </div>
+      <div class="meta">
+        <div><span class="k">אזור</span></div>
+        <div>ראשון לציון ובית דגן</div>
+        <div><span class="k">שיטה</span></div>
+        <div>חברותא אישית</div>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div>
+        <p class="tag">חסד</p>
+        <h3>ביקור חולים</h3>
+        <p>ביקורים קבועים אצל חולים בבתי החולים — חיזוק, סיוע מעשי, וקשר אנושי חם למי שנמצא בימים לא פשוטים.</p>
+      </div>
+      <div class="meta">
+        <div><span class="k">מסגרת</span></div>
+        <div>ביקורים קבועים</div>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div>
+        <p class="tag">מענה</p>
+        <h3>קו המענה על כל חלקי התורה</h3>
+        <p>קו ייחודי מסוגו: מענה אנושי — לא מוקלט — לשאלות בכל חלקי התורה, לכל פונה, בכל שעה.</p>
+      </div>
+      <div class="meta">
+        <div><span class="k">זמינות</span></div>
+        <div>24 שעות, מלבד שבת</div>
+        <div><span class="k">אופי</span></div>
+        <div>מענה אנושי חי</div>
+      </div>
+    </article>
+
   </div>
 </section>
 
-<!-- ==================== במספרים ==================== -->
-<section class="section impact" id="impact">
+<div class="quote">
   <div class="wrap">
-    <header class="section-head reveal">
-      <p class="eyebrow light">התוצאות בשטח</p>
-      <h2>העמותה במספרים</h2>
-    </header>
-    <div class="stats">
-      <div class="stat reveal"><span class="stat-num" data-count="120">0</span><span class="stat-label">ילדים במסגרות שלנו</span></div>
-      <div class="stat reveal"><span class="stat-num" data-count="35">0</span><span class="stat-label">אברכים בכולל</span></div>
-      <div class="stat reveal"><span class="stat-num" data-count="18000">0</span><span class="stat-label">שעות לימוד בשנה</span></div>
-      <div class="stat reveal"><span class="stat-num" data-count="9">0</span><span class="stat-label">שנות פעילות</span></div>
-    </div>
+    <p>מָה אָהַבְתִּי תוֹרָתֶךָ, כָּל הַיּוֹם הִיא שִׂיחָתִי</p>
+    <cite>תהילים קי״ט, צ״ז</cite>
   </div>
-</section>
+</div>
 
-<!-- ==================== תרומות ==================== -->
-<section class="section section-alt" id="donate">
+<section class="support" id="tmicha">
   <div class="wrap">
-    <header class="section-head reveal">
-      <p class="eyebrow">שותפות</p>
-      <h2>להיות שותף</h2>
-      <p class="section-sub">בחרו את סכום התרומה — או כל סכום אחר. כל תרומה מגיעה ישירות לפעילות.</p>
-    </header>
-
-    <div class="donate-grid">
-      <article class="donate-card reveal">
-        <p class="donate-amount">₪52</p>
-        <h3>שעת לימוד</h3>
-        <p>מממן שעת לימוד אחת של אברך בכולל.</p>
-        <a class="btn btn-outline" href="#contact">לתרומה</a>
-      </article>
-
-      <article class="donate-card featured reveal">
-        <span class="ribbon">הכי נבחר</span>
-        <p class="donate-amount">₪180</p>
-        <h3>חודש של ילד</h3>
-        <p>מלווה ילד אחד לאורך חודש שלם בחיידר, כולל ספרים וציוד.</p>
-        <a class="btn btn-gold" href="#contact">לתרומה</a>
-      </article>
-
-      <article class="donate-card reveal">
-        <p class="donate-amount">₪1,000</p>
-        <h3>הוראת קבע</h3>
-        <p>שותפות קבועה שמאפשרת לנו לתכנן קדימה ולהרחיב את הפעילות.</p>
-        <a class="btn btn-outline" href="#contact">לתרומה</a>
-      </article>
-    </div>
-
-    <!-- ========= לעריכה: פרטי העברה בנקאית / ביט / פייבוקס ========= -->
-    <div class="bank-box reveal">
-      <h3>דרכים נוספות לתרום</h3>
-      <dl class="bank-details">
-        <div><dt>העברה בנקאית</dt><dd>בנק 00 · סניף 000 · חשבון 000000</dd></div>
-        <div><dt>ביט / פייבוקס</dt><dd>055-0000000</dd></div>
-        <div><dt>קבלה לפי סעיף 46</dt><dd>מונפקת לכל תרומה, לבקשתכם</dd></div>
-      </dl>
-      <p class="note">לתרומה בהיקף גדול או להקדשה לעילוי נשמת — <a href="#contact">צרו איתנו קשר</a> ונשמח לסייע.</p>
+    <div class="section-head"><h2>להיות שותף</h2></div>
+    <p>כל מפעל כאן עומד על שותפים. שותפות במרכז תורה וחסד מחזיקה אברכים בסדרי הלימוד, מבחנים לבחורים בבין הזמנים, וחברותא לצעיר שמתקרב.</p>
+    <div class="actions" style="margin-top:22px;">
+      <a class="btn" href="https://www.matara.pro/nedarimplus/online/?mosad=7016745" target="_blank" rel="noopener">לתרומה מאובטחת</a>
+      <a class="btn ghost" style="color:#F6E9C8; border-color:#8A5F52;" href="https://drive.google.com/file/d/1_BkS2pssJtB52_dVLvR_-kLNml6ymJKt/view" target="_blank" rel="noopener">לעיון בפרוספקט</a>
     </div>
   </div>
 </section>
 
-<!-- ==================== גלריה ==================== -->
-<section class="section" id="gallery">
+<section id="kesher">
   <div class="wrap">
-    <header class="section-head reveal">
-      <p class="eyebrow">רגעים מהשטח</p>
-      <h2>גלריה</h2>
-      <p class="section-sub">החליפו את התמונות בתיקייה <code>assets/img</code> בתמונות של העמותה.</p>
-    </header>
-    <div class="gallery">
-      <figure class="reveal"><div class="ph" aria-hidden="true">📷</div><figcaption>סדר לימוד בכולל</figcaption></figure>
-      <figure class="reveal"><div class="ph" aria-hidden="true">📷</div><figcaption>מסיבת חומש בחיידר</figcaption></figure>
-      <figure class="reveal"><div class="ph" aria-hidden="true">📷</div><figcaption>שיעור במדרשייה</figcaption></figure>
-      <figure class="reveal"><div class="ph" aria-hidden="true">📷</div><figcaption>הנחת תפילין</figcaption></figure>
+    <div class="section-head"><h2>יצירת קשר</h2></div>
+    <div class="contact-grid">
+      <div>
+        <h4>טלפון</h4>
+        <p><a class="big-tel" href="tel:0556780645">055-678-0645</a></p>
+      </div>
+      <div>
+        <h4>דוא״ל</h4>
+        <p><a href="mailto:b0556734282@gmail.com">b0556734282@gmail.com</a></p>
+      </div>
+      <div>
+        <h4>משרדי המרכז</h4>
+        <p><a href="mailto:m0733579171@gmail.com">m0733579171@gmail.com</a><br>073-345-2543</p>
+      </div>
+      <div>
+        <h4>וואטסאפ</h4>
+        <p><a href="https://wa.me/972556780645" target="_blank" rel="noopener">שליחת הודעה</a></p>
+      </div>
+      <div>
+        <h4>שותפות ותרומות</h4>
+        <p><a href="https://www.matara.pro/nedarimplus/online/?mosad=7016745" target="_blank" rel="noopener">נדרים פלוס — מוסד 7016745</a></p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ==================== צור קשר ==================== -->
-<section class="section section-alt" id="contact">
-  <div class="wrap grid-2">
-    <div class="reveal">
-      <p class="eyebrow">נשמח לשמוע</p>
-      <h2>צרו איתנו קשר</h2>
-      <p>לשאלות, לתרומות, לרישום למסגרות או לכל בקשה אחרת — אנחנו כאן.</p>
-
-      <!-- ========= לעריכה: פרטי הקשר של העמותה ========= -->
-      <ul class="contact-list">
-        <li><span aria-hidden="true">📞</span><a href="tel:+9720550000000">055-0000000</a></li>
-        <li><span aria-hidden="true">✉️</span><a href="mailto:info@example.org">info@example.org</a></li>
-        <li><span aria-hidden="true">📍</span>רחוב הסופרים, בני ברק</li>
-        <li><span aria-hidden="true">💬</span><a href="https://wa.me/9720550000000" target="_blank" rel="noopener">שליחת הודעה בוואטסאפ</a></li>
-      </ul>
-    </div>
-
-    <!--
-      ========= לעריכה: חיבור הטופס =========
-      הטופס פותח כרגע את תוכנת המייל של הגולש (ללא שרת).
-      לקבלת פניות ישירות למייל אפשר להירשם בחינם ב-Formspree ולהחליף את השורה ל:
-      <form class="contact-form" action="https://formspree.io/f/הקוד-שלכם" method="POST">
-    -->
-    <form class="contact-form reveal" id="contactForm" novalidate>
-      <div class="field">
-        <label for="name">שם מלא</label>
-        <input type="text" id="name" name="name" autocomplete="name" required>
-      </div>
-      <div class="field">
-        <label for="phone">טלפון</label>
-        <input type="tel" id="phone" name="phone" autocomplete="tel" required>
-      </div>
-      <div class="field">
-        <label for="email">אימייל <span class="opt">(לא חובה)</span></label>
-        <input type="email" id="email" name="email" autocomplete="email">
-      </div>
-      <div class="field">
-        <label for="message">במה נוכל לעזור?</label>
-        <textarea id="message" name="message" rows="4" required></textarea>
-      </div>
-      <button class="btn btn-gold btn-block" type="submit">שליחה</button>
-      <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
-    </form>
-  </div>
-</section>
-
-</main>
-
-<!-- ==================== פוטר ==================== -->
-<footer class="site-footer">
-  <div class="wrap footer-inner">
-    <div>
-      <strong class="footer-brand">עמותת תורת שלום</strong>
-      <p>הפצת תורה, חינוך וקירוב לבבות.</p>
-    </div>
-    <nav aria-label="ניווט תחתון">
-      <a href="#about">אודות</a>
-      <a href="#activities">פעילות</a>
-      <a href="#donate">תרומה</a>
-      <a href="#contact">צור קשר</a>
-    </nav>
-    <p class="copy">© <span id="year">2026</span> כל הזכויות שמורות.</p>
-  </div>
-</footer>
-
-<a class="float-donate" href="#donate" aria-label="מעבר לאזור התרומות">לתרומה ❤</a>
-
-<script src="assets/js/main.js" defer></script>
+<div class="wrap">
+  <footer>
+    <span>מרכז תורה וחסד · עולם חסד יבנה</span>
+    <span>הרב ישעיה זאב שפירא</span>
+  </footer>
+</div>
 </body>
 </html>
