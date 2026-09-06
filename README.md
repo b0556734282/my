@@ -61,11 +61,21 @@ assets/img/favicon.svg       ← אייקון הלשונית בדפדפן
 
 ## העלאה לאוויר (GitHub Pages — בחינם)
 
-הפרסום אוטומטי: כל דחיפה לענף `main` מפרסמת את האתר בכתובת
-`https://<שם-המשתמש>.github.io/<שם-הריפו>/`.
+> **צריך פעולה ידנית אחת לפני שהאתר עולה לאוויר.**
+> GitHub Pages עדיין לא הופעל במאגר, ולכן כל ריצות הפרסום עד היום נכשלו
+> (`Create Pages site failed. Error: Resource not accessible by integration`).
+> ה-workflow מנסה להפעיל את Pages בעצמו (`enablement: true`), אבל ההרשאה
+> הזו לא ניתנת לטוקן האוטומטי — רק בעל המאגר יכול.
+>
+> **מה עושים (פעם אחת, חצי דקה):**
+> 1. **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+> 2. אם עדיין נכשל: **Settings → Actions → General → Workflow permissions**
+>    ולסמן **Read and write permissions**.
+> 3. **Actions → Deploy site to GitHub Pages → Run workflow** (או פשוט לדחוף
+>    שוב) — ומכאן זה אוטומטי לתמיד.
 
-ה-workflow מפעיל את GitHub Pages בעצמו (`enablement: true`), כך שאין צורך
-בהגדרה ידנית. אם בכל זאת צריך: **Settings → Pages → Source: GitHub Actions**.
+אחרי ההפעלה: כל דחיפה לענף `main` מפרסמת את האתר בכתובת
+`https://<שם-המשתמש>.github.io/<שם-הריפו>/`.
 
 לחיבור דומיין פרטי: באותו מסך, תחת **Custom domain**, ואצל רשם הדומיינים
 מפנים רשומת CNAME לכתובת שגיטהאב נותן.
