@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>תרומה לעמותת תורת שלום</title>
+<meta name="description" content="תרומה מאובטחת לעמותת תורת שלום — תרומה חד־פעמית או הוראת קבע חודשית. קבלה מוכרת לצורכי מס.">
+<meta name="theme-color" content="#12325a">
+<meta name="robots" content="index, follow">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="he_IL">
+<meta property="og:title" content="תרומה לעמותת תורת שלום">
+<meta property="og:description" content="כל תרומה הופכת לשעת לימוד. תרומה מאובטחת, קבלה מוכרת לצורכי מס.">
+<meta property="og:image" content="assets/img/og-image.jpg">
+
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&family=Frank+Ruhl+Libre:wght@500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="page-narrow">
+
+<a class="skip-link" href="#main">דילוג לתוכן הראשי</a>
+
+<header class="site-header scrolled">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true" data-cfg="orgShort">ת"ש</span>
+      <span class="brand-text">
+        <strong data-cfg="orgName">עמותת תורת שלום</strong>
+        <small data-cfg="orgTagline">הפצת תורה • חינוך • קירוב</small>
+      </span>
+    </a>
+    <a class="back-link" href="index.html">
+      <span aria-hidden="true">→</span> חזרה לאתר
+    </a>
+  </div>
+</header>
+
+<main id="main" class="donate-page">
+  <div class="wrap">
+
+    <header class="section-head">
+      <p class="eyebrow">שותפות בזכות הרבים</p>
+      <h1>תרומה לעמותה</h1>
+      <p class="section-sub">כל תרומה מגיעה ישירות לפעילות — לשיעור, לילד, לשעת לימוד.</p>
+    </header>
+
+    <!-- ============ בחירת סכום ואופן תרומה ============ -->
+    <section class="donate-form-card" aria-labelledby="chooseTitle">
+      <h2 id="chooseTitle" class="visually-hidden">בחירת סכום</h2>
+
+      <div class="toggle-group" role="group" aria-label="סוג התרומה">
+        <button type="button" class="toggle active" data-type="once" aria-pressed="true">תרומה חד־פעמית</button>
+        <button type="button" class="toggle" data-type="monthly" aria-pressed="false">הוראת קבע חודשית</button>
+      </div>
+
+      <p class="amount-hint" id="amountHint">בחרו סכום, או הקלידו סכום אחר:</p>
+
+      <div class="amount-grid" role="group" aria-label="סכום התרומה">
+        <button type="button" class="amount" data-amount="52">₪52</button>
+        <button type="button" class="amount active" data-amount="180" aria-pressed="true">₪180</button>
+        <button type="button" class="amount" data-amount="360">₪360</button>
+        <button type="button" class="amount" data-amount="1000">₪1,000</button>
+      </div>
+
+      <div class="field custom-amount">
+        <label for="customAmount">סכום אחר (₪)</label>
+        <input type="number" id="customAmount" min="1" step="1" inputmode="numeric" placeholder="למשל 250">
+      </div>
+
+      <div class="field" id="monthsField" hidden>
+        <label for="months">למשך כמה חודשים?</label>
+        <select id="months">
+          <option value="12">12 חודשים</option>
+          <option value="24">24 חודשים</option>
+          <option value="36">36 חודשים</option>
+          <option value="999">עד להודעה חדשה</option>
+        </select>
+      </div>
+
+      <p class="donate-summary" id="donateSummary" role="status" aria-live="polite"></p>
+
+      <button class="btn btn-gold btn-block" id="startDonation" type="button">מעבר לתשלום מאובטח</button>
+
+      <p class="note secure-note">
+        <span aria-hidden="true">🔒</span>
+        התשלום מתבצע בסליקה מאובטחת בתקן PCI. פרטי האשראי אינם נשמרים באתר.
+      </p>
+    </section>
+
+    <!-- ============ מסך הסליקה (נדרים פלוס) ============ -->
+    <section class="payment-frame-wrap" id="paymentWrap" hidden aria-labelledby="payTitle">
+      <h2 id="payTitle">פרטי התשלום</h2>
+      <p class="pay-for" id="payFor"></p>
+      <iframe id="NedarimFrame" title="טופס תשלום מאובטח" src="about:blank" scrolling="no"></iframe>
+      <p class="form-status" id="payStatus" role="status" aria-live="polite"></p>
+      <button class="btn btn-outline btn-block" type="button" id="backToAmount">חזרה לבחירת סכום</button>
+    </section>
+
+    <!-- ============ דרכים נוספות לתרום ============ -->
+    <section class="bank-box" aria-labelledby="otherWays">
+      <h2 id="otherWays">דרכים נוספות לתרום</h2>
+      <dl class="bank-details">
+        <div data-cfg-if="bank.account">
+          <dt>העברה בנקאית</dt>
+          <dd>
+            <span data-cfg="bank.bankName"></span>
+            <span data-cfg-if="bank.branch"> · סניף <span data-cfg="bank.branch"></span></span>
+            · חשבון <span data-cfg="bank.account"></span>
+            <br><small data-cfg-if="bank.accountOwner">על שם <span data-cfg="bank.accountOwner"></span></small>
+          </dd>
+        </div>
+        <div data-cfg-if="bit">
+          <dt>ביט / פייבוקס</dt>
+          <dd data-cfg="bit"></dd>
+        </div>
+        <div data-cfg-if="phone">
+          <dt>תרומה טלפונית</dt>
+          <dd><a data-cfg-href="phone" href="#"><span data-cfg="phone"></span></a></dd>
+        </div>
+        <div data-cfg-if="section46">
+          <dt>קבלה לצורכי מס</dt>
+          <dd>העמותה מנפיקה קבלה מוכרת לפי סעיף 46 לכל תרומה.</dd>
+        </div>
+      </dl>
+      <p class="note">
+        לתרומה בהיקף גדול, להקדשה לעילוי נשמת או להנצחה —
+        <a href="index.html#contact">צרו איתנו קשר</a> ונשמח לסייע אישית.
+      </p>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <strong class="footer-brand" data-cfg="orgName">עמותת תורת שלום</strong>
+      <p>הפצת תורה, חינוך וקירוב לבבות.</p>
+      <p data-cfg-if="amutaNumber" class="amuta">עמותה רשומה מס' <span data-cfg="amutaNumber"></span></p>
+    </div>
+    <nav aria-label="ניווט תחתון">
+      <a href="index.html#about">אודות</a>
+      <a href="index.html#activities">פעילות</a>
+      <a href="index.html#contact">צור קשר</a>
+    </nav>
+    <p class="copy">© <span id="year">2026</span> כל הזכויות שמורות.</p>
+  </div>
+</footer>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/apply-config.js" defer></script>
+<script src="assets/js/donate.js" defer></script>
+</body>
+</html>

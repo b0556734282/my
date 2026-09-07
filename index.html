@@ -4,7 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- ========= לעריכה: שם העמותה ותיאור קצר (מופיע בגוגל ובכותרת הדפדפן) ========= -->
 <title>עמותת תורת שלום | הפצת תורה, חינוך וקירוב לבבות</title>
 <meta name="description" content="עמותת תורת שלום פועלת להפצת תורה, לחינוך ילדים ולקירוב רחוקים — כולל אברכים, חיידר, מדרשיית קירוב ושיעורי הכנה לבר מצווה.">
 <meta name="theme-color" content="#12325a">
@@ -16,6 +15,7 @@
 <meta property="og:description" content="הפצת תורה, חינוך וקירוב לבבות — שותפים לזכות הרבים.">
 <meta property="og:image" content="assets/img/og-image.jpg">
 
+<meta name="robots" content="index, follow">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,10 +30,10 @@
 <header class="site-header" id="siteHeader">
   <div class="wrap header-inner">
     <a class="brand" href="#top">
-      <span class="brand-mark" aria-hidden="true">ת"ש</span>
+      <span class="brand-mark" aria-hidden="true" data-cfg="orgShort">ת"ש</span>
       <span class="brand-text">
-        <strong>עמותת תורת שלום</strong>
-        <small>הפצת תורה • חינוך • קירוב</small>
+        <strong data-cfg="orgName">עמותת תורת שלום</strong>
+        <small data-cfg="orgTagline">הפצת תורה • חינוך • קירוב</small>
       </span>
     </a>
 
@@ -48,7 +48,7 @@
         <li><a href="#impact">במספרים</a></li>
         <li><a href="#gallery">גלריה</a></li>
         <li><a href="#contact">צור קשר</a></li>
-        <li><a class="btn btn-gold btn-sm" href="#donate">לתרומה</a></li>
+        <li><a class="btn btn-gold btn-sm" href="donate.html">לתרומה</a></li>
       </ul>
     </nav>
   </div>
@@ -60,14 +60,14 @@
 <section class="hero" id="top">
   <div class="hero-bg" aria-hidden="true"></div>
   <div class="wrap hero-inner">
-    <p class="eyebrow reveal">עמותה רשומה • מס' עמותה 58-0000000</p>
+    <p class="eyebrow reveal">עמותה רשומה<span data-cfg-if="amutaNumber"> • מס' עמותה <span data-cfg="amutaNumber"></span></span></p>
     <h1 class="reveal">מגדילים תורה<br><span class="gold">ומאדירים לבבות</span></h1>
     <p class="lead reveal">
       אנחנו מלווים ילדים, בחורים ואברכים בדרך אל התורה — מהחיידר ועד הכולל,
       ומהשיעור הראשון ועד לבית של תורה. כל תרומה הופכת לשעת לימוד.
     </p>
     <div class="hero-cta reveal">
-      <a class="btn btn-gold" href="#donate">אני רוצה לתרום</a>
+      <a class="btn btn-gold" href="donate.html">אני רוצה לתרום</a>
       <a class="btn btn-ghost" href="#activities">לפעילות שלנו</a>
     </div>
   </div>
@@ -190,7 +190,7 @@
         <p class="donate-amount">₪52</p>
         <h3>שעת לימוד</h3>
         <p>מממן שעת לימוד אחת של אברך בכולל.</p>
-        <a class="btn btn-outline" href="#contact">לתרומה</a>
+        <a class="btn btn-outline" href="donate.html?amount=52">לתרומה</a>
       </article>
 
       <article class="donate-card featured reveal">
@@ -198,27 +198,30 @@
         <p class="donate-amount">₪180</p>
         <h3>חודש של ילד</h3>
         <p>מלווה ילד אחד לאורך חודש שלם בחיידר, כולל ספרים וציוד.</p>
-        <a class="btn btn-gold" href="#contact">לתרומה</a>
+        <a class="btn btn-gold" href="donate.html?amount=180">לתרומה</a>
       </article>
 
       <article class="donate-card reveal">
         <p class="donate-amount">₪1,000</p>
         <h3>הוראת קבע</h3>
         <p>שותפות קבועה שמאפשרת לנו לתכנן קדימה ולהרחיב את הפעילות.</p>
-        <a class="btn btn-outline" href="#contact">לתרומה</a>
+        <a class="btn btn-outline" href="donate.html?amount=1000&type=monthly">לתרומה</a>
       </article>
     </div>
 
-    <!-- ========= לעריכה: פרטי העברה בנקאית / ביט / פייבוקס ========= -->
     <div class="bank-box reveal">
       <h3>דרכים נוספות לתרום</h3>
-      <dl class="bank-details">
-        <div><dt>העברה בנקאית</dt><dd>בנק 00 · סניף 000 · חשבון 000000</dd></div>
-        <div><dt>ביט / פייבוקס</dt><dd>055-0000000</dd></div>
-        <div><dt>קבלה לפי סעיף 46</dt><dd>מונפקת לכל תרומה, לבקשתכם</dd></div>
-      </dl>
-      <p class="note">לתרומה בהיקף גדול או להקדשה לעילוי נשמת — <a href="#contact">צרו איתנו קשר</a> ונשמח לסייע.</p>
+      <p>
+        אפשר לתרום בכרטיס אשראי בסליקה מאובטחת, בהוראת קבע חודשית,
+        בהעברה בנקאית או בביט — הכול מרוכז בעמוד התרומה.
+      </p>
+      <a class="btn btn-gold" href="donate.html">לעמוד התרומה</a>
+      <p class="note">
+        לתרומה בהיקף גדול או להקדשה לעילוי נשמת —
+        <a href="#contact">צרו איתנו קשר</a> ונשמח לסייע.
+      </p>
     </div>
+
   </div>
 </section>
 
@@ -228,7 +231,7 @@
     <header class="section-head reveal">
       <p class="eyebrow">רגעים מהשטח</p>
       <h2>גלריה</h2>
-      <p class="section-sub">החליפו את התמונות בתיקייה <code>assets/img</code> בתמונות של העמותה.</p>
+      <p class="section-sub">רגעים קטנים מתוך יום הלימוד, החיידר והשיעורים.</p>
     </header>
     <div class="gallery">
       <figure class="reveal"><div class="ph" aria-hidden="true">📷</div><figcaption>סדר לימוד בכולל</figcaption></figure>
@@ -247,21 +250,15 @@
       <h2>צרו איתנו קשר</h2>
       <p>לשאלות, לתרומות, לרישום למסגרות או לכל בקשה אחרת — אנחנו כאן.</p>
 
-      <!-- ========= לעריכה: פרטי הקשר של העמותה ========= -->
       <ul class="contact-list">
-        <li><span aria-hidden="true">📞</span><a href="tel:+9720550000000">055-0000000</a></li>
-        <li><span aria-hidden="true">✉️</span><a href="mailto:info@example.org">info@example.org</a></li>
-        <li><span aria-hidden="true">📍</span>רחוב הסופרים, בני ברק</li>
-        <li><span aria-hidden="true">💬</span><a href="https://wa.me/9720550000000" target="_blank" rel="noopener">שליחת הודעה בוואטסאפ</a></li>
+        <li data-cfg-if="phone"><span aria-hidden="true">📞</span><a data-cfg-href="phone" href="#"><span data-cfg="phone"></span></a></li>
+        <li data-cfg-if="email"><span aria-hidden="true">✉️</span><a data-cfg-href="email" href="#"><span data-cfg="email"></span></a></li>
+        <li data-cfg-if="address"><span aria-hidden="true">📍</span><span data-cfg="address"></span></li>
+        <li data-cfg-if="whatsapp"><span aria-hidden="true">💬</span><a data-cfg-href="whatsapp" href="#" target="_blank" rel="noopener">שליחת הודעה בוואטסאפ</a></li>
       </ul>
     </div>
 
-    <!--
-      ========= לעריכה: חיבור הטופס =========
-      הטופס פותח כרגע את תוכנת המייל של הגולש (ללא שרת).
-      לקבלת פניות ישירות למייל אפשר להירשם בחינם ב-Formspree ולהחליף את השורה ל:
-      <form class="contact-form" action="https://formspree.io/f/הקוד-שלכם" method="POST">
-    -->
+    <!-- הטופס מוגדר דרך assets/js/config.js — ראו README -->
     <form class="contact-form reveal" id="contactForm" novalidate>
       <div class="field">
         <label for="name">שם מלא</label>
@@ -291,21 +288,24 @@
 <footer class="site-footer">
   <div class="wrap footer-inner">
     <div>
-      <strong class="footer-brand">עמותת תורת שלום</strong>
+      <strong class="footer-brand" data-cfg="orgName">עמותת תורת שלום</strong>
       <p>הפצת תורה, חינוך וקירוב לבבות.</p>
+      <p class="amuta" data-cfg-if="amutaNumber">עמותה רשומה מס' <span data-cfg="amutaNumber"></span></p>
     </div>
     <nav aria-label="ניווט תחתון">
       <a href="#about">אודות</a>
       <a href="#activities">פעילות</a>
-      <a href="#donate">תרומה</a>
+      <a href="donate.html">תרומה</a>
       <a href="#contact">צור קשר</a>
     </nav>
     <p class="copy">© <span id="year">2026</span> כל הזכויות שמורות.</p>
   </div>
 </footer>
 
-<a class="float-donate" href="#donate" aria-label="מעבר לאזור התרומות">לתרומה ❤</a>
+<a class="float-donate" href="donate.html" aria-label="מעבר לעמוד התרומות">לתרומה ❤</a>
 
+<script src="assets/js/config.js"></script>
+<script src="assets/js/apply-config.js" defer></script>
 <script src="assets/js/main.js" defer></script>
 </body>
 </html>

@@ -121,9 +121,8 @@
   ------------------------------------- */
   var form = document.getElementById("contactForm");
 
-  if (form && !form.getAttribute("action")) {
-    // ---- לעריכה: כתובת המייל שאליה יגיעו הפניות ----
-    var TO_EMAIL = "info@example.org";
+  if (form) {
+    var cfg = window.SITE_CONFIG || {};
     var status = document.getElementById("formStatus");
 
     var showError = function (input, message) {
@@ -142,6 +141,12 @@
       field.classList.remove("invalid");
       var err = field.querySelector(".error");
       if (err) err.remove();
+    };
+
+    var setStatus = function (kind, text) {
+      if (!status) return;
+      status.className = "form-status" + (kind ? " " + kind : "");
+      status.textContent = text;
     };
 
     form.addEventListener("input", function (e) {
@@ -173,27 +178,62 @@
       if (!message.value.trim()) { showError(message, "נא לכתוב את תוכן הפנייה"); ok = false; }
 
       if (!ok) {
-        if (status) { status.className = "form-status"; status.textContent = "יש להשלים את השדות המסומנים."; }
+        setStatus("err", "יש להשלים את השדות המסומנים.");
         form.querySelector(".invalid input, .invalid textarea").focus();
         return;
       }
 
-      var body = [
+      var lines = [
         "שם: " + name.value.trim(),
         "טלפון: " + phone.value.trim(),
         "אימייל: " + (email.value.trim() || "לא צוין"),
         "",
         message.value.trim()
-      ].join("\n");
+      ];
+      var body = lines.join("\n");
+      var subject = "פנייה מהאתר — " + name.value.trim();
 
-      window.location.href = "mailto:" + TO_EMAIL +
-        "?subject=" + encodeURIComponent("פנייה מהאתר — " + name.value.trim()) +
-        "&body=" + encodeURIComponent(body);
+      /* --- 1. שליחה ישירה לשרת טפסים (Formspree וכדומה) --- */
+      if (cfg.formEndpoint) {
+        var button = form.querySelector('button[type="submit"]');
+        if (button) { button.disabled = true; button.textContent = "שולח..."; }
+        setStatus("", "שולח את הפנייה...");
 
-      if (status) {
-        status.className = "form-status ok";
-        status.textContent = "תודה! נפתחה אצלך תוכנת המייל לשליחת הפנייה.";
+        fetch(cfg.formEndpoint, {
+          method: "POST",
+          headers: { "Accept": "application/json" },
+          body: new FormData(form)
+        }).then(function (res) {
+          if (!res.ok) throw new Error("send failed");
+          form.reset();
+          setStatus("ok", "תודה! הפנייה התקבלה, ונחזור אליכם בהקדם.");
+        }).catch(function () {
+          setStatus("err", "השליחה נכשלה. אפשר לנסות שוב, או ליצור קשר בטלפון.");
+        }).finally(function () {
+          if (button) { button.disabled = false; button.textContent = "שליחה"; }
+        });
+        return;
       }
+
+      /* --- 2. שליחה בוואטסאפ (אם הוגדר מספר) --- */
+      if (cfg.whatsapp) {
+        var digits = String(cfg.whatsapp).replace(/\D/g, "");
+        var intl = digits.indexOf("972") === 0 ? digits : "972" + digits.replace(/^0/, "");
+        window.open("https://wa.me/" + intl + "?text=" + encodeURIComponent(body), "_blank", "noopener");
+        setStatus("ok", "תודה! נפתח וואטסאפ לשליחת הפנייה.");
+        return;
+      }
+
+      /* --- 3. גיבוי: פתיחת תוכנת המייל של הגולש --- */
+      if (cfg.email) {
+        window.location.href = "mailto:" + cfg.email +
+          "?subject=" + encodeURIComponent(subject) +
+          "&body=" + encodeURIComponent(body);
+        setStatus("ok", "תודה! נפתחה אצלך תוכנת המייל לשליחת הפנייה.");
+        return;
+      }
+
+      setStatus("err", "טרם הוגדרו פרטי קשר לקבלת פניות.");
     });
   }
 })();
