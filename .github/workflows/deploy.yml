@@ -1,9 +1,10 @@
-# פרסום אוטומטי של האתר ל-GitHub Pages בכל דחיפה לענף
+# פרסום אוטומטי של האתר ל-GitHub Pages בכל דחיפה ל-main
+# main הוא מקור האמת היחיד של האתר. עבודה שלא מוזגה ל-main לא תעלה לאוויר.
 name: Deploy site to GitHub Pages
 
 on:
   push:
-    branches: [main, claude/mah-kora-r6fqo8]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
