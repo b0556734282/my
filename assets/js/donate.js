@@ -9,7 +9,8 @@
 
   var cfg = (window.SITE_CONFIG || {});
   var nedarim = cfg.nedarim || {};
-  var NEDARIM_URL = "https://matara.pro/nedarimplus/iframe/?language=he";
+  var NEDARIM_IFRAME = "https://matara.pro/nedarimplus/iframe/?language=he";
+  var NEDARIM_HOSTED = "https://www.matara.pro/nedarimplus/online/";
 
   var yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
@@ -139,7 +140,7 @@
       return;
     }
 
-    // לא הוגדרו פרטי נדרים פלוס — מפנים לדרכי התרומה האחרות
+    // אין בכלל מספר מוסד — מפנים לדרכי התרומה האחרות
     if (!nedarim.mosadId) {
       if (summary) {
         summary.className = "donate-summary warn";
@@ -150,9 +151,26 @@
       return;
     }
 
+    /* יש מספר מוסד אבל אין ApiValid — מעבירים לעמוד התרומה המאובטח
+       של נדרים פלוס, עם הסכום שנבחר. עובד מיד, בלי הגדרות נוספות. */
+    if (!nedarim.apiValid) {
+      var url = NEDARIM_HOSTED +
+        "?mosad=" + encodeURIComponent(nedarim.mosadId) +
+        "&amount=" + encodeURIComponent(state.amount) +
+        "&currency=1";
+      if (state.type === "monthly") url += "&tashlumim=" + encodeURIComponent(state.months);
+
+      if (summary) {
+        summary.className = "donate-summary";
+        summary.textContent = "מעבירים אתכם לעמוד התרומה המאובטח של נדרים פלוס...";
+      }
+      window.location.href = url;
+      return;
+    }
+
     payWrap.hidden = false;
     if (payFor) payFor.textContent = summary ? summary.textContent : "";
-    if (frame.getAttribute("src") !== NEDARIM_URL) frame.setAttribute("src", NEDARIM_URL);
+    if (frame.getAttribute("src") !== NEDARIM_IFRAME) frame.setAttribute("src", NEDARIM_IFRAME);
     payWrap.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
