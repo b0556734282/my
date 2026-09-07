@@ -60,14 +60,14 @@
 
   /* ---------- שם העמותה בכותרת הדפדפן ובנתוני השיתוף ---------- */
   if (cfg.orgName) {
-    document.title = document.title.replace("עמותת תורת שלום", cfg.orgName);
+    document.title = document.title.replace("מרכז התורה והחסד", cfg.orgName);
   }
 
   /* ---------- נתונים מובנים לגוגל (JSON-LD) ---------- */
   var ld = {
     "@context": "https://schema.org",
     "@type": "NGO",
-    "name": cfg.orgName || "עמותת תורת שלום",
+    "name": cfg.orgName || "מרכז התורה והחסד",
     "description": "הפצת תורה, חינוך וקירוב לבבות.",
     "areaServed": "IL"
   };
