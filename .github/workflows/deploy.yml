@@ -1,5 +1,9 @@
 # פרסום אוטומטי של האתר ל-GitHub Pages בכל דחיפה ל-main
 # main הוא מקור האמת היחיד של האתר. עבודה שלא מוזגה ל-main לא תעלה לאוויר.
+#
+# ⚠ תנאי הכרחי לפעם הראשונה: צריך להפעיל GitHub Pages ידנית במאגר.
+#    Settings → Pages → Build and deployment → Source: GitHub Actions
+#    בלי זה כל ההרצות כאן ייכשלו, והאתר לא יעלה לאוויר — גם אם הקוד מושלם.
 name: Deploy site to GitHub Pages
 
 on:
@@ -25,10 +29,28 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # enablement: true מפעיל את GitHub Pages אוטומטית אם עדיין לא הופעל במאגר
-      - uses: actions/configure-pages@v5
+      # enablement: true מנסה להפעיל את GitHub Pages אוטומטית.
+      # ההרשאה הזו לא תמיד קיימת ל-GITHUB_TOKEN, ולכן אם זה נכשל
+      # אנחנו מדפיסים הסבר ברור במקום שגיאה סתומה.
+      - id: pages
+        uses: actions/configure-pages@v5
+        continue-on-error: true
         with:
           enablement: true
+
+      - name: בדיקה ש-GitHub Pages מופעל
+        if: steps.pages.outcome != 'success'
+        run: |
+          echo "::error title=GitHub Pages לא מופעל::צריך להפעיל את Pages ידנית פעם אחת"
+          echo ""
+          echo "האתר לא יעלה לאוויר עד שיבוצע השלב הבא, פעם אחת בלבד:"
+          echo ""
+          echo "  1. להיכנס אל https://github.com/${{ github.repository }}/settings/pages"
+          echo "  2. תחת 'Build and deployment' → 'Source' לבחור: GitHub Actions"
+          echo "  3. לחזור לכאן וללחוץ Re-run jobs"
+          echo ""
+          echo "זו הסיבה שההרצות הקודמות נכשלו. הקוד עצמו תקין."
+          exit 1
 
       - uses: actions/upload-pages-artifact@v3
         with:
