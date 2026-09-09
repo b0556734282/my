@@ -3,14 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src 'self'; frame-src 'none'; form-action 'none'; manifest-src 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
 <title>הדף לא נמצא | עמותת מרכז התורה והחסד</title>
 <meta name="theme-color" content="#12325a">
-<meta name="robots" content="noindex">
+<meta name="robots" content="noindex, nofollow">
+
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&family=Frank+Ruhl+Libre:wght@500;700;900&display=swap" rel="stylesheet">
+<link rel="apple-touch-icon" href="assets/img/logo.jpg">
 <link rel="stylesheet" href="assets/css/style.css">
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/security.js"></script>
+<script src="assets/js/apply-config.js" defer></script>
+<script src="assets/js/main.js" defer></script>
 </head>
 <body>
 
@@ -19,10 +27,16 @@
     <div class="big-icon" aria-hidden="true">🔎</div>
     <h1>הדף לא נמצא</h1>
     <p class="lead">כנראה שהקישור השתנה, או שנפלה טעות בכתובת.</p>
+    <p>אפשר לחזור לעמוד הבית, או לעבור ישירות לעמוד התרומה.</p>
     <div class="hero-cta">
       <a class="btn btn-gold" href="index.html">לעמוד הבית</a>
       <a class="btn btn-ghost dark" href="donate.html">לתרומה</a>
     </div>
+
+    <ul class="contact-list">
+      <li data-cfg-if="phone"><span aria-hidden="true">📞</span><a data-cfg-href="phone" href="#"><span data-cfg="phone"></span></a></li>
+      <li data-cfg-if="email"><span aria-hidden="true">✉️</span><a data-cfg-href="email" href="#"><span data-cfg="email"></span></a></li>
+    </ul>
   </div>
 </main>
 

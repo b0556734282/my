@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /thanks.html
+Disallow: /404.html
 
-Sitemap: sitemap.xml
+Sitemap: https://b0556734282.github.io/my/sitemap.xml

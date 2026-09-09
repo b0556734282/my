@@ -1,0 +1,74 @@
+# בדיקת תקינות בסיסית לפני פרסום.
+# מטרתה לתפוס טעויות פשוטות (שגיאת תחביר, קובץ חסר, CSP שנשכח)
+# לפני שהן מגיעות לאתר החי.
+name: בדיקת תקינות האתר
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: תחביר קובצי JavaScript
+        run: |
+          for f in assets/js/*.js; do
+            node --check "$f" || exit 1
+            echo "תקין: $f"
+          done
+
+      - name: תקינות JSON ו-XML
+        run: |
+          python3 -c "import json; json.load(open('manifest.webmanifest')); print('manifest תקין')"
+          python3 -c "import xml.dom.minidom as m; m.parse('sitemap.xml'); print('sitemap תקין')"
+
+      - name: כל עמוד HTML מכיל מדיניות אבטחת תוכן
+        run: |
+          fail=0
+          for f in index.html donate.html thanks.html 404.html; do
+            if ! grep -q 'Content-Security-Policy' "$f"; then
+              echo "חסר CSP בקובץ $f"; fail=1
+            fi
+          done
+          exit $fail
+
+      - name: אין קוד או עיצוב מוטבע בתוך ה-HTML
+        run: |
+          fail=0
+          for f in index.html donate.html thanks.html 404.html; do
+            if grep -n '<script' "$f" | grep -v 'src=' | grep -v 'application/ld' | grep -q .; then
+              echo "סקריפט מוטבע ב-$f — ייחסם על ידי ה-CSP"; fail=1
+            fi
+            if grep -q 'style="' "$f"; then
+              echo "עיצוב מוטבע (style=) ב-$f — ייחסם על ידי ה-CSP"; fail=1
+            fi
+            if grep -qiE ' on(click|load|error|mouseover)=' "$f"; then
+              echo "מטפל אירועים מוטבע ב-$f — ייחסם על ידי ה-CSP"; fail=1
+            fi
+          done
+          exit $fail
+
+      - name: כל הקבצים שמקושרים מה-HTML קיימים
+        run: |
+          fail=0
+          for f in index.html donate.html thanks.html 404.html; do
+            for ref in $(grep -oE '(src|href)="[^"#:]+\.(js|css|jpg|png|svg|webmanifest)"' "$f" | sed -E 's/.*="([^"]+)"/\1/'); do
+              [ -f "$ref" ] || { echo "קובץ חסר: $ref (מקושר מ-$f)"; fail=1; }
+            done
+          done
+          exit $fail
+
+      - name: אין אזכור של חיידר תורת שלום באתר העמותה
+        run: |
+          if grep -rniE 'חיידר' --include='*.html' --include='*.js' --include='*.css' . ; then
+            echo "האתר הזה שייך לעמותה בלבד — החיידר הוא גוף נפרד. ראו CLAUDE.md"
+            exit 1
+          fi
+          echo "תקין"

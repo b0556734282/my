@@ -1,0 +1,6 @@
+# מצאתם בעיית אבטחה באתר? נשמח לשמוע ונטפל בזה מיד.
+# If you found a security issue on this site, please tell us.
+
+Contact: mailto:m0733579171@gmail.com
+Preferred-Languages: he, en
+Expires: 2027-12-31T23:59:59.000Z

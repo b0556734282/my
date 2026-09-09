@@ -6,13 +6,22 @@
      data-cfg="phone"          → הטקסט של האלמנט יוחלף בטלפון
      data-cfg-href="phone"     → הקישור יופנה לטלפון (tel:) / מייל / וואטסאפ
      data-cfg-if="phone"       → האלמנט יוסתר לגמרי אם השדה ריק
+     data-cfg-unless="bit"     → האלמנט יוסתר אם השדה כן מלא
 
    כך אפשר לערוך את כל פרטי העמותה במקום אחד בלבד.
+
+   אבטחה: הערכים נכתבים תמיד עם textContent (אף פעם לא innerHTML),
+   וכל כתובת עוברת דרך safeUrl כדי שערך כמו "javascript:..." בקובץ
+   ההגדרות לא יוכל להפוך לקוד רץ.
    ============================================================ */
 (function () {
   "use strict";
 
   var cfg = window.SITE_CONFIG || {};
+  var sec = window.SITE_SECURITY || {};
+
+  var safeUrl = sec.safeUrl || function (v) { return String(v || ""); };
+  var intl    = sec.intlPhone || function (v) { return String(v || "").replace(/\D/g, ""); };
 
   /* קריאת שדה מקונן, למשל "bank.account" */
   var get = function (path) {
@@ -21,18 +30,14 @@
     }, cfg);
   };
 
-  /* מספר טלפון → ספרות בלבד בפורמט בינלאומי, לקישורי wa.me ו-tel: */
-  var intl = function (number) {
-    var digits = String(number).replace(/\D/g, "");
-    if (!digits) return "";
-    if (digits.indexOf("972") === 0) return digits;
-    return "972" + digits.replace(/^0/, "");
-  };
-
   /* ---------- הסתרת מקטעים שאין להם מידע ---------- */
   document.querySelectorAll("[data-cfg-if]").forEach(function (el) {
-    var value = get(el.getAttribute("data-cfg-if"));
-    if (!value) el.remove();
+    if (!get(el.getAttribute("data-cfg-if"))) el.remove();
+  });
+
+  /* ---------- הסתרת מקטעים שיש להם מידע (ההפך) ---------- */
+  document.querySelectorAll("[data-cfg-unless]").forEach(function (el) {
+    if (get(el.getAttribute("data-cfg-unless"))) el.remove();
   });
 
   /* ---------- מילוי טקסטים ---------- */
@@ -47,34 +52,82 @@
     var value = get(key);
     if (!value) return;
 
+    var href = "";
     if (key === "email") {
-      el.setAttribute("href", "mailto:" + value);
+      href = "mailto:" + String(value).replace(/[^\w.@+-]/g, "");
     } else if (key === "whatsapp") {
-      el.setAttribute("href", "https://wa.me/" + intl(value));
-    } else if (key === "phone") {
-      el.setAttribute("href", "tel:+" + intl(value));
+      href = "https://wa.me/" + intl(value);
+    } else if (key === "phone" || key === "officePhone") {
+      href = "tel:+" + intl(value);
     } else {
-      el.setAttribute("href", value);
+      href = value;
     }
+
+    var checked = safeUrl(href);
+    if (checked) el.setAttribute("href", checked);
   });
 
   /* ---------- שם העמותה בכותרת הדפדפן ובנתוני השיתוף ---------- */
-  if (cfg.orgName) {
-    document.title = document.title.replace("מרכז התורה והחסד", cfg.orgName);
+  var DEFAULT_NAME = "מרכז התורה והחסד";
+  if (cfg.orgName && cfg.orgName !== DEFAULT_NAME) {
+    document.title = document.title.split(DEFAULT_NAME).join(cfg.orgName);
+    document.querySelectorAll('meta[property="og:title"], meta[name="description"], meta[property="og:description"]')
+      .forEach(function (meta) {
+        var content = meta.getAttribute("content") || "";
+        if (content.indexOf(DEFAULT_NAME) !== -1) {
+          meta.setAttribute("content", content.split(DEFAULT_NAME).join(cfg.orgName));
+        }
+      });
   }
 
-  /* ---------- נתונים מובנים לגוגל (JSON-LD) ---------- */
+  /* ---------- כתובת קנונית וכתובת שיתוף ---------- */
+  var siteUrl = safeUrl(cfg.siteUrl);
+  if (siteUrl) {
+    var base = siteUrl.replace(/\/+$/, "") + "/";
+    var page = window.location.pathname.split("/").pop() || "index.html";
+    var full = base + (page === "index.html" ? "" : page);
+
+    var canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement("link");
+      canonical.setAttribute("rel", "canonical");
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute("href", full);
+
+    var ogUrl = document.querySelector('meta[property="og:url"]');
+    if (!ogUrl) {
+      ogUrl = document.createElement("meta");
+      ogUrl.setAttribute("property", "og:url");
+      document.head.appendChild(ogUrl);
+    }
+    ogUrl.setAttribute("content", full);
+  }
+
+  /* ---------- נתונים מובנים לגוגל (JSON-LD) ----------
+     נכתב עם textContent בלבד, כך שגם ערך משונה בקובץ ההגדרות
+     לא יכול "לשבור" את התג ולהפוך לסקריפט.
+  ------------------------------------------------- */
   var ld = {
     "@context": "https://schema.org",
     "@type": "NGO",
-    "name": cfg.orgName || "מרכז התורה והחסד",
+    "name": cfg.orgName || DEFAULT_NAME,
     "description": "הפצת תורה, חינוך וקירוב לבבות.",
-    "areaServed": "IL"
+    "areaServed": "IL",
+    "inLanguage": "he"
   };
-  if (cfg.siteUrl) ld.url = cfg.siteUrl;
+  if (siteUrl)     ld.url = siteUrl;
   if (cfg.phone)   ld.telephone = "+" + intl(cfg.phone);
   if (cfg.email)   ld.email = cfg.email;
+  if (cfg.amutaNumber) ld.identifier = "עמותה " + cfg.amutaNumber;
   if (cfg.address) ld.address = { "@type": "PostalAddress", "streetAddress": cfg.address, "addressCountry": "IL" };
+  if (cfg.nedarim && cfg.nedarim.mosadId) {
+    ld.potentialAction = {
+      "@type": "DonateAction",
+      "name": "תרומה לעמותה",
+      "target": (siteUrl ? siteUrl.replace(/\/+$/, "") + "/donate.html" : "donate.html")
+    };
+  }
 
   var script = document.createElement("script");
   script.type = "application/ld+json";

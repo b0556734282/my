@@ -4,42 +4,72 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<!-- ============================================================
+     מדיניות אבטחת תוכן (CSP)
+     ------------------------------------------------------------
+     ברירת המחדל היא "לא לטעון כלום" ('none'), ומעליה מותר במפורש
+     רק מה שהאתר באמת צריך — והכול מהאתר עצמו ('self').
+     המשמעות: גם אם מישהו יצליח להחדיר תגית סקריפט לעמוד,
+     הדפדפן פשוט יסרב להריץ אותה. אין סקריפטים חיצוניים,
+     אין גופנים מגוגל, אין מעקב ואין פרסומות.
+     ============================================================ -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src 'self' https://formspree.io https://*.formspree.io; frame-src 'none'; form-action 'self'; manifest-src 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
 <title>עמותת מרכז התורה והחסד | הפצת תורה, חינוך וקירוב לבבות</title>
-<meta name="description" content="עמותת מרכז התורה והחסד פועלת להפצת תורה ולקירוב רחוקים — כולל אברכים, מדרשיית קירוב, שיעורי הכנה לבר מצווה וקו מענה תורני.">
+<meta name="description" content="עמותת מרכז התורה והחסד פועלת להפצת תורה ולקירוב רחוקים — כולל אברכים, מדרשיית קירוב, שיעורי הכנה לבר מצווה וקו מענה תורני. תרומה מאובטחת עם קבלה מוכרת לצורכי מס.">
 <meta name="theme-color" content="#12325a">
+<meta name="author" content="עמותת מרכז התורה והחסד">
 
 <!-- שיתוף ברשתות ובוואטסאפ -->
 <meta property="og:type" content="website">
 <meta property="og:locale" content="he_IL">
+<meta property="og:site_name" content="עמותת מרכז התורה והחסד">
 <meta property="og:title" content="עמותת מרכז התורה והחסד">
 <meta property="og:description" content="הפצת תורה, חינוך וקירוב לבבות — שותפים לזכות הרבים.">
 <meta property="og:image" content="assets/img/logo.jpg">
+<meta name="twitter:card" content="summary_large_image">
 
 <meta name="robots" content="index, follow">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&family=Frank+Ruhl+Libre:wght@500;700;900&display=swap" rel="stylesheet">
+<link rel="apple-touch-icon" href="assets/img/logo.jpg">
+<link rel="manifest" href="manifest.webmanifest">
 <link rel="stylesheet" href="assets/css/style.css">
+
+<!-- ההגדרות ושכבת האבטחה נטענות ראשונות, לפני שהעמוד מצויר,
+     כדי שההגנה מפני הטמעה באתר זר תפעל עוד לפני שמוצג תוכן. -->
+<script src="assets/js/config.js"></script>
+<script src="assets/js/security.js"></script>
+<script src="assets/js/apply-config.js" defer></script>
+<script src="assets/js/main.js" defer></script>
 </head>
 <body>
 
 <a class="skip-link" href="#main">דילוג לתוכן הראשי</a>
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
 <!-- ==================== תפריט עליון ==================== -->
 <header class="site-header" id="siteHeader">
   <div class="wrap header-inner">
     <a class="brand" href="#top">
-      <span class="brand-mark" aria-hidden="true"><img src="assets/img/logo.jpg" alt=""></span>
+      <span class="brand-mark" aria-hidden="true"><img src="assets/img/logo.jpg" alt="" width="46" height="46"></span>
       <span class="brand-text">
         <strong data-cfg="orgName">מרכז התורה והחסד</strong>
         <small data-cfg="orgTagline">הפצת תורה • חינוך • קירוב</small>
+        <small class="hebrew-date" id="hebrewDate" hidden></small>
       </span>
     </a>
 
-    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mainNav" aria-label="פתיחת תפריט">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="header-tools">
+      <button class="theme-toggle" type="button" aria-pressed="false" aria-label="מעבר לתצוגה כהה" title="תצוגה כהה" hidden>
+        <span class="icon-moon" aria-hidden="true">🌙</span>
+        <span class="icon-sun" aria-hidden="true">☀️</span>
+      </button>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mainNav" aria-label="פתיחת תפריט">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
 
     <nav class="main-nav" id="mainNav" aria-label="ניווט ראשי">
       <ul>
@@ -47,6 +77,7 @@
         <li><a href="#activities">הפעילות שלנו</a></li>
         <li><a href="#impact">במספרים</a></li>
         <li><a href="#gallery">גלריה</a></li>
+        <li><a href="#faq">שאלות ותשובות</a></li>
         <li><a href="#contact">צור קשר</a></li>
         <li><a class="btn btn-gold btn-sm" href="donate.html">לתרומה</a></li>
       </ul>
@@ -70,6 +101,12 @@
       <a class="btn btn-gold" href="donate.html">אני רוצה לתרום</a>
       <a class="btn btn-ghost" href="#activities">לפעילות שלנו</a>
     </div>
+
+    <ul class="hero-badges reveal">
+      <li><span aria-hidden="true">🧾</span> <b>קבלה מוכרת</b> לצורכי מס (סעיף 46)</li>
+      <li><span aria-hidden="true">🔒</span> <b>סליקה מאובטחת</b> בתקן PCI</li>
+      <li><span aria-hidden="true">📊</span> <b>שקיפות מלאה</b> בדיווח לתורמים</li>
+    </ul>
   </div>
 </section>
 
@@ -93,6 +130,7 @@
         <li>ניהול שקוף ודיווח שנתי לתורמים</li>
         <li>ליווי הלכתי ורוחני של רבני העמותה</li>
         <li>כל התרומות מוקדשות ישירות לפעילות</li>
+        <li>קבלה מוכרת לצורכי מס על כל תרומה</li>
       </ul>
     </div>
     <div class="about-card reveal">
@@ -125,30 +163,35 @@
         <div class="card-icon" aria-hidden="true">📖</div>
         <h3>כולל אברכים</h3>
         <p>סדרי לימוד קבועים לאברכים, עם מלגות חודשיות שמאפשרות התמסרות מלאה ללימוד.</p>
+        <span class="card-meta">כל ימות השבוע</span>
       </article>
 
       <article class="card reveal">
         <div class="card-icon" aria-hidden="true">🕯️</div>
         <h3>מדרשיית קירוב</h3>
         <p>שיעורים ומפגשים שבועיים לנוער ולמבוגרים, בסביבה נעימה ובגובה העיניים.</p>
+        <span class="card-meta">מפגש שבועי קבוע</span>
       </article>
 
       <article class="card reveal">
         <div class="card-icon" aria-hidden="true">🎓</div>
         <h3>שיעורי הכנה לבר מצווה</h3>
         <p>תוכנית מסודרת שמכינה את הילד להנחת תפילין, לקריאה בתורה ולכניסה לעול מצוות.</p>
+        <span class="card-meta">ליווי אישי לכל ילד</span>
       </article>
 
       <article class="card reveal">
         <div class="card-icon" aria-hidden="true">📞</div>
         <h3>קו מענה תורני</h3>
         <p>מענה אנושי על כל חלקי התורה, 24 שעות ביממה (מלבד שבת) — לכל שואל ומתעניין.</p>
+        <span class="card-meta">24 שעות ביממה</span>
       </article>
 
       <article class="card reveal">
         <div class="card-icon" aria-hidden="true">⏰</div>
         <h3>מערכת התרעות זמני היום</h3>
         <p>התרעות חכמות על זמני היום ההלכתיים, כדי שאף זמן תפילה לא יתפספס.</p>
+        <span class="card-meta">שירות חינם לציבור</span>
       </article>
     </div>
   </div>
@@ -173,6 +216,18 @@
 <!-- ==================== תרומות ==================== -->
 <section class="section section-alt" id="donate">
   <div class="wrap">
+
+    <!-- פס התקדמות של קמפיין — מוצג רק אם הוגדר יעד ב-config.js -->
+    <div class="campaign reveal" id="campaign" hidden>
+      <h3 id="campaignTitle">הקמפיין הנוכחי</h3>
+      <div class="campaign-track" id="campaignMeter" role="progressbar"
+           aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="התקדמות הקמפיין">
+        <div class="campaign-bar" id="campaignBar"></div>
+      </div>
+      <p class="campaign-numbers" id="campaignNumbers"></p>
+      <p class="campaign-deadline" id="campaignDeadline" hidden></p>
+    </div>
+
     <header class="section-head reveal">
       <p class="eyebrow">שותפות</p>
       <h2>להיות שותף</h2>
@@ -199,7 +254,7 @@
         <p class="donate-amount">₪1,000</p>
         <h3>הוראת קבע</h3>
         <p>שותפות קבועה שמאפשרת לנו לתכנן קדימה ולהרחיב את הפעילות.</p>
-        <a class="btn btn-outline" href="donate.html?amount=1000&type=monthly">לתרומה</a>
+        <a class="btn btn-outline" href="donate.html?amount=1000&amp;type=monthly">לתרומה</a>
       </article>
     </div>
 
@@ -225,7 +280,7 @@
     <header class="section-head reveal">
       <p class="eyebrow">רגעים מהשטח</p>
       <h2>גלריה</h2>
-      <p class="section-sub">רגעים קטנים מתוך סדרי הלימוד, הכולל והשיעורים.</p>
+      <p class="section-sub">רגעים קטנים מתוך סדרי הלימוד, הכולל והשיעורים. לחיצה על תמונה מגדילה אותה.</p>
     </header>
     <div class="gallery">
       <figure class="reveal">
@@ -245,11 +300,92 @@
         <figcaption>מעמד סיום מסכת</figcaption>
       </figure>
     </div>
+
+    <div class="share-row reveal">
+      <p class="share-label">אוהבים את מה שאנחנו עושים?</p>
+      <button class="share-btn" type="button" data-share="whatsapp"><span aria-hidden="true">💬</span> שיתוף בוואטסאפ</button>
+      <button class="share-btn" type="button" data-share="copy"><span aria-hidden="true">🔗</span> העתקת קישור</button>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== שאלות ותשובות ==================== -->
+<section class="section section-alt" id="faq">
+  <div class="wrap">
+    <header class="section-head center reveal">
+      <p class="eyebrow">לפני שתורמים</p>
+      <h2>שאלות ותשובות</h2>
+      <p class="section-sub">כל מה שחשוב לדעת על התרומה ועל הפעילות.</p>
+    </header>
+
+    <div class="faq reveal">
+      <details class="faq-item">
+        <summary>האם התרומה מוכרת לצורכי מס?</summary>
+        <div class="faq-answer">
+          <p>
+            כן. העמותה מנפיקה קבלה מוכרת לפי סעיף 46 לפקודת מס הכנסה על כל תרומה,
+            והקבלה נשלחת אליכם במייל תוך זמן קצר מרגע התרומה.
+          </p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>איך אני יודע שהתשלום מאובטח?</summary>
+        <div class="faq-answer">
+          <p>
+            פרטי כרטיס האשראי לא עוברים דרך האתר שלנו ולא נשמרים בו בכלל.
+            הסליקה מתבצעת אצל חברת הסליקה "נדרים פלוס", בתקן אבטחת המידע PCI-DSS.
+            האתר עצמו מוגש בחיבור מוצפן (HTTPS) בלבד.
+          </p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>אפשר לתרום בהוראת קבע חודשית?</summary>
+        <div class="faq-answer">
+          <p>
+            בוודאי, וזו הדרך שהכי עוזרת לנו. בעמוד התרומה בוחרים "הוראת קבע חודשית",
+            קובעים סכום ומספר חודשים, ואפשר להפסיק בכל שלב בפנייה אלינו.
+          </p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>לאן הכסף הולך בפועל?</summary>
+        <div class="faq-answer">
+          <p>
+            למלגות לאברכי הכולל, לשיעורי ההכנה לבר מצווה, למדרשיית הקירוב
+            ולתפעול קו המענה התורני. אנחנו מדווחים לתורמים על הפעילות,
+            ותמיד אפשר לבקש פירוט — נשמח להראות.
+          </p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>אפשר להקדיש את התרומה לעילוי נשמת או לרפואה שלמה?</summary>
+        <div class="faq-answer">
+          <p>
+            כן. בעמוד התרומה יש שדה ייעודי להקדשה, והשם ייכתב וילווה את הלימוד.
+            להנצחה מיוחדת או לתרומה בהיקף גדול — <a href="#contact">צרו קשר</a> ונסייע אישית.
+          </p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>איך אפשר לרשום ילד לשיעורי ההכנה?</summary>
+        <div class="faq-answer">
+          <p>
+            פשוט מאוד — משאירים פרטים בטופס למטה או מתקשרים,
+            ואנחנו חוזרים אליכם עם כל הפרטים על המסגרת המתאימה.
+          </p>
+        </div>
+      </details>
+    </div>
   </div>
 </section>
 
 <!-- ==================== צור קשר ==================== -->
-<section class="section section-alt" id="contact">
+<section class="section" id="contact">
   <div class="wrap grid-2">
     <div class="reveal">
       <p class="eyebrow">נשמח לשמוע</p>
@@ -261,30 +397,41 @@
         <li data-cfg-if="email"><span aria-hidden="true">✉️</span><a data-cfg-href="email" href="#"><span data-cfg="email"></span></a></li>
         <li data-cfg-if="officePhone"><span aria-hidden="true">🏢</span>משרדי המרכז: <a data-cfg-href="officePhone" href="#"><span data-cfg="officePhone"></span></a></li>
         <li data-cfg-if="address"><span aria-hidden="true">📍</span><span data-cfg="address"></span></li>
-        <li data-cfg-if="whatsapp"><span aria-hidden="true">💬</span><a data-cfg-href="whatsapp" href="#" target="_blank" rel="noopener">שליחת הודעה בוואטסאפ</a></li>
+        <li data-cfg-if="whatsapp"><span aria-hidden="true">💬</span><a data-cfg-href="whatsapp" href="#">שליחת הודעה בוואטסאפ</a></li>
       </ul>
     </div>
 
     <!-- הטופס מוגדר דרך assets/js/config.js — ראו README -->
-    <form class="contact-form reveal" id="contactForm" novalidate>
+    <form class="contact-form reveal" id="contactForm" novalidate autocomplete="on">
       <div class="field">
         <label for="name">שם מלא</label>
-        <input type="text" id="name" name="name" autocomplete="name" required>
+        <input type="text" id="name" name="name" autocomplete="name" maxlength="80" required>
       </div>
       <div class="field">
         <label for="phone">טלפון</label>
-        <input type="tel" id="phone" name="phone" autocomplete="tel" required>
+        <input type="tel" id="phone" name="phone" autocomplete="tel" maxlength="25" required>
       </div>
       <div class="field">
         <label for="email">אימייל <span class="opt">(לא חובה)</span></label>
-        <input type="email" id="email" name="email" autocomplete="email">
+        <input type="email" id="email" name="email" autocomplete="email" maxlength="120">
       </div>
       <div class="field">
         <label for="message">במה נוכל לעזור?</label>
-        <textarea id="message" name="message" rows="4" required></textarea>
+        <textarea id="message" name="message" rows="4" maxlength="2000" required></textarea>
       </div>
+
+      <!-- שדה מלכודת לרובוטים: בני אדם לא רואים אותו ולא ממלאים אותו -->
+      <div class="field-trap" aria-hidden="true">
+        <label for="website">אל תמלאו שדה זה</label>
+        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+      </div>
+
       <button class="btn btn-gold btn-block" type="submit">שליחה</button>
       <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+      <p class="form-privacy">
+        הפרטים משמשים אך ורק כדי לחזור אליכם. אין באתר מעקב, אין פרסומות,
+        ואיננו מעבירים פרטים לאף גורם אחר.
+      </p>
     </form>
   </div>
 </section>
@@ -298,10 +445,16 @@
       <strong class="footer-brand" data-cfg="orgName">מרכז התורה והחסד</strong>
       <p>הפצת תורה, חינוך וקירוב לבבות.</p>
       <p class="amuta" data-cfg-if="amutaNumber">עמותה רשומה מס' <span data-cfg="amutaNumber"></span></p>
+      <ul class="footer-contact">
+        <li data-cfg-if="phone"><a data-cfg-href="phone" href="#"><span data-cfg="phone"></span></a></li>
+        <li data-cfg-if="email"><a data-cfg-href="email" href="#"><span data-cfg="email"></span></a></li>
+        <li data-cfg-if="address"><span data-cfg="address"></span></li>
+      </ul>
     </div>
     <nav aria-label="ניווט תחתון">
       <a href="#about">אודות</a>
       <a href="#activities">פעילות</a>
+      <a href="#faq">שאלות ותשובות</a>
       <a href="donate.html">תרומה</a>
       <a href="#contact">צור קשר</a>
     </nav>
@@ -310,9 +463,7 @@
 </footer>
 
 <a class="float-donate" href="donate.html" aria-label="מעבר לעמוד התרומות">לתרומה ❤</a>
+<button class="back-to-top" id="backToTop" type="button" aria-label="חזרה לראש העמוד">↑</button>
 
-<script src="assets/js/config.js"></script>
-<script src="assets/js/apply-config.js" defer></script>
-<script src="assets/js/main.js" defer></script>
 </body>
 </html>

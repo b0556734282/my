@@ -4,6 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<!-- ============================================================
+     מדיניות אבטחת תוכן (CSP)
+     ------------------------------------------------------------
+     זהו העמוד הרגיש ביותר באתר, ולכן המדיניות כאן הדוקה במיוחד:
+     המסגרת היחידה שמותר לטעון היא זו של חברת הסליקה נדרים פלוס,
+     וכל סקריפט, גופן או עיצוב חייבים להגיע מהאתר עצמו בלבד.
+     ============================================================ -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src 'self' https://formspree.io https://*.formspree.io; frame-src https://matara.pro https://www.matara.pro; form-action 'self' https://matara.pro https://www.matara.pro; manifest-src 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
 <title>תרומה לעמותת מרכז התורה והחסד</title>
 <meta name="description" content="תרומה מאובטחת לעמותת מרכז התורה והחסד — תרומה חד־פעמית או הוראת קבע חודשית. קבלה מוכרת לצורכי מס.">
 <meta name="theme-color" content="#12325a">
@@ -16,27 +26,38 @@
 <meta property="og:image" content="assets/img/logo.jpg">
 
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&family=Frank+Ruhl+Libre:wght@500;700;900&display=swap" rel="stylesheet">
+<link rel="apple-touch-icon" href="assets/img/logo.jpg">
+<link rel="manifest" href="manifest.webmanifest">
 <link rel="stylesheet" href="assets/css/style.css">
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/security.js"></script>
+<script src="assets/js/apply-config.js" defer></script>
+<script src="assets/js/main.js" defer></script>
+<script src="assets/js/donate.js" defer></script>
 </head>
 <body class="page-narrow">
 
 <a class="skip-link" href="#main">דילוג לתוכן הראשי</a>
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
-<header class="site-header scrolled">
+<header class="site-header scrolled" id="siteHeader">
   <div class="wrap header-inner">
     <a class="brand" href="index.html">
-      <span class="brand-mark" aria-hidden="true"><img src="assets/img/logo.jpg" alt=""></span>
+      <span class="brand-mark" aria-hidden="true"><img src="assets/img/logo.jpg" alt="" width="46" height="46"></span>
       <span class="brand-text">
         <strong data-cfg="orgName">מרכז התורה והחסד</strong>
         <small data-cfg="orgTagline">הפצת תורה • חינוך • קירוב</small>
+        <small class="hebrew-date" id="hebrewDate" hidden></small>
       </span>
     </a>
-    <a class="back-link" href="index.html">
-      <span aria-hidden="true">→</span> חזרה לאתר
-    </a>
+    <div class="header-tools">
+      <button class="theme-toggle" type="button" aria-pressed="false" aria-label="מעבר לתצוגה כהה" title="תצוגה כהה" hidden>
+        <span class="icon-moon" aria-hidden="true">🌙</span>
+        <span class="icon-sun" aria-hidden="true">☀️</span>
+      </button>
+      <a class="back-link" href="index.html"><span aria-hidden="true">→</span> חזרה לאתר</a>
+    </div>
   </div>
 </header>
 
@@ -49,6 +70,13 @@
       <p class="section-sub">כל תרומה מגיעה ישירות לפעילות — לשיעור, לילד, לשעת לימוד.</p>
     </header>
 
+    <noscript>
+      <div class="donate-summary warn">
+        כדי לתרום בכרטיס אשראי דרך האתר צריך להפעיל JavaScript בדפדפן.
+        אפשר לתרום גם בהעברה בנקאית או בטלפון — הפרטים בהמשך העמוד.
+      </div>
+    </noscript>
+
     <!-- ============ בחירת סכום ואופן תרומה ============ -->
     <section class="donate-form-card" aria-labelledby="chooseTitle">
       <h2 id="chooseTitle" class="visually-hidden">בחירת סכום</h2>
@@ -60,16 +88,12 @@
 
       <p class="amount-hint" id="amountHint">בחרו סכום, או הקלידו סכום אחר:</p>
 
-      <div class="amount-grid" role="group" aria-label="סכום התרומה">
-        <button type="button" class="amount" data-amount="52">₪52</button>
-        <button type="button" class="amount active" data-amount="180" aria-pressed="true">₪180</button>
-        <button type="button" class="amount" data-amount="360">₪360</button>
-        <button type="button" class="amount" data-amount="1000">₪1,000</button>
-      </div>
+      <!-- כפתורי הסכומים נבנים מ-config.js (donation.presets) -->
+      <div class="amount-grid" id="amountGrid" role="group" aria-label="סכום התרומה"></div>
 
       <div class="field custom-amount">
         <label for="customAmount">סכום אחר (₪)</label>
-        <input type="number" id="customAmount" min="1" step="1" inputmode="numeric" placeholder="למשל 250">
+        <input type="number" id="customAmount" min="5" step="1" inputmode="numeric" placeholder="למשל 250" autocomplete="off">
       </div>
 
       <div class="field" id="monthsField" hidden>
@@ -82,21 +106,39 @@
         </select>
       </div>
 
+      <div class="field">
+        <label for="dedication">הקדשה <span class="opt">(לא חובה)</span></label>
+        <input type="text" id="dedication" maxlength="100" autocomplete="off"
+               placeholder="לעילוי נשמת / לרפואת / להצלחת...">
+      </div>
+
       <p class="donate-summary" id="donateSummary" role="status" aria-live="polite"></p>
+      <p class="donate-impact" id="donateImpact" hidden></p>
 
       <button class="btn btn-gold btn-block" id="startDonation" type="button">מעבר לתשלום מאובטח</button>
 
       <p class="note secure-note">
         <span aria-hidden="true">🔒</span>
-        התשלום מתבצע בסליקה מאובטחת בתקן PCI. פרטי האשראי אינם נשמרים באתר.
+        <span>
+          התשלום מתבצע בסליקה מאובטחת בתקן PCI אצל חברת "נדרים פלוס".
+          פרטי האשראי אינם עוברים דרך האתר הזה ואינם נשמרים בו.
+        </span>
       </p>
+
+      <ul class="trust-row">
+        <li><span aria-hidden="true">🧾</span> קבלה מוכרת לצורכי מס</li>
+        <li><span aria-hidden="true">🔐</span> חיבור מוצפן (HTTPS)</li>
+        <li><span aria-hidden="true">🚫</span> בלי מעקב ובלי פרסומות</li>
+      </ul>
     </section>
 
     <!-- ============ מסך הסליקה (נדרים פלוס) ============ -->
     <section class="payment-frame-wrap" id="paymentWrap" hidden aria-labelledby="payTitle">
       <h2 id="payTitle">פרטי התשלום</h2>
       <p class="pay-for" id="payFor"></p>
-      <iframe id="NedarimFrame" title="טופס תשלום מאובטח" src="about:blank" scrolling="no"></iframe>
+      <iframe id="NedarimFrame" title="טופס תשלום מאובטח של נדרים פלוס"
+              src="about:blank" scrolling="no" loading="lazy"
+              referrerpolicy="strict-origin"></iframe>
       <p class="form-status" id="payStatus" role="status" aria-live="polite"></p>
       <button class="btn btn-outline btn-block" type="button" id="backToAmount">חזרה לבחירת סכום</button>
     </section>
@@ -107,16 +149,16 @@
       <dl class="bank-details">
         <div data-cfg-if="bank.account">
           <dt>העברה בנקאית</dt>
-          <dd>
-            <span data-cfg="bank.bankName"></span>
-            <span data-cfg-if="bank.branch"> · סניף <span data-cfg="bank.branch"></span></span>
-            · חשבון <span data-cfg="bank.account"></span>
+          <dd id="bankLine">
+            <span data-cfg="bank.bankName"></span><span data-cfg-if="bank.branch"> · סניף <span data-cfg="bank.branch"></span></span> · חשבון <span data-cfg="bank.account"></span>
             <br><small data-cfg-if="bank.accountOwner">על שם <span data-cfg="bank.accountOwner"></span></small>
           </dd>
+          <button class="copy-btn" type="button" data-target="bankLine">העתקה</button>
         </div>
         <div data-cfg-if="bit">
           <dt>ביט / פייבוקס</dt>
-          <dd data-cfg="bit"></dd>
+          <dd id="bitLine" data-cfg="bit"></dd>
+          <button class="copy-btn" type="button" data-target="bitLine">העתקה</button>
         </div>
         <div data-cfg-if="phone">
           <dt>תרומה טלפונית</dt>
@@ -133,6 +175,12 @@
       </p>
     </section>
 
+    <div class="share-row">
+      <p class="share-label">שתפו את התרומה עם עוד שותפים:</p>
+      <button class="share-btn" type="button" data-share="whatsapp"><span aria-hidden="true">💬</span> שיתוף בוואטסאפ</button>
+      <button class="share-btn" type="button" data-share="copy"><span aria-hidden="true">🔗</span> העתקת קישור</button>
+    </div>
+
   </div>
 </main>
 
@@ -142,18 +190,22 @@
       <strong class="footer-brand" data-cfg="orgName">מרכז התורה והחסד</strong>
       <p>הפצת תורה, חינוך וקירוב לבבות.</p>
       <p data-cfg-if="amutaNumber" class="amuta">עמותה רשומה מס' <span data-cfg="amutaNumber"></span></p>
+      <ul class="footer-contact">
+        <li data-cfg-if="phone"><a data-cfg-href="phone" href="#"><span data-cfg="phone"></span></a></li>
+        <li data-cfg-if="email"><a data-cfg-href="email" href="#"><span data-cfg="email"></span></a></li>
+      </ul>
     </div>
     <nav aria-label="ניווט תחתון">
       <a href="index.html#about">אודות</a>
       <a href="index.html#activities">פעילות</a>
+      <a href="index.html#faq">שאלות ותשובות</a>
       <a href="index.html#contact">צור קשר</a>
     </nav>
     <p class="copy">© <span id="year">2026</span> כל הזכויות שמורות.</p>
   </div>
 </footer>
 
-<script src="assets/js/config.js"></script>
-<script src="assets/js/apply-config.js" defer></script>
-<script src="assets/js/donate.js" defer></script>
+<button class="back-to-top" id="backToTop" type="button" aria-label="חזרה לראש העמוד">↑</button>
+
 </body>
 </html>

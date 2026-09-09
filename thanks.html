@@ -3,15 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src 'self'; frame-src 'none'; form-action 'none'; manifest-src 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
 <title>תודה רבה! | עמותת מרכז התורה והחסד</title>
 <meta name="description" content="תודה על התרומה לעמותת מרכז התורה והחסד.">
 <meta name="theme-color" content="#12325a">
-<meta name="robots" content="noindex">
+<meta name="robots" content="noindex, nofollow">
+
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&family=Frank+Ruhl+Libre:wght@500;700;900&display=swap" rel="stylesheet">
+<link rel="apple-touch-icon" href="assets/img/logo.jpg">
 <link rel="stylesheet" href="assets/css/style.css">
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/security.js"></script>
+<script src="assets/js/apply-config.js" defer></script>
+<script src="assets/js/main.js" defer></script>
 </head>
 <body>
 
@@ -24,18 +32,29 @@
       ועוד שיעור מתקיים.
     </p>
     <p>
-      קבלה נשלחת אליכם במייל תוך זמן קצר. אם לא הגיעה — נשמח שתיצרו קשר
-      ונטפל בזה מיד.
+      קבלה מוכרת לצורכי מס נשלחת אליכם במייל תוך זמן קצר.
+      אם לא הגיעה — נשמח שתיצרו קשר ונטפל בזה מיד.
     </p>
+
+    <ul class="contact-list">
+      <li data-cfg-if="phone"><span aria-hidden="true">📞</span><a data-cfg-href="phone" href="#"><span data-cfg="phone"></span></a></li>
+      <li data-cfg-if="email"><span aria-hidden="true">✉️</span><a data-cfg-href="email" href="#"><span data-cfg="email"></span></a></li>
+    </ul>
+
     <p class="blessing">"וְהָיָה מַעֲשֵׂה הַצְּדָקָה שָׁלוֹם"</p>
+
     <div class="hero-cta">
       <a class="btn btn-gold" href="index.html">חזרה לאתר</a>
       <a class="btn btn-ghost dark" href="index.html#contact">צור קשר</a>
     </div>
+
+    <div class="share-row">
+      <p class="share-label">מזכים את הרבים:</p>
+      <button class="share-btn" type="button" data-share="whatsapp"><span aria-hidden="true">💬</span> שיתוף בוואטסאפ</button>
+      <button class="share-btn" type="button" data-share="copy"><span aria-hidden="true">🔗</span> העתקת קישור</button>
+    </div>
   </div>
 </main>
 
-<script src="assets/js/config.js"></script>
-<script src="assets/js/apply-config.js" defer></script>
 </body>
 </html>
