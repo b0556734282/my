@@ -75,5 +75,10 @@ window.SITE_CONFIG = {
   allowDarkMode:  true,        // כפתור מעבר למצב לילה
 
   /* ---------- כתובת האתר (לשיתוף בגוגל וברשתות) ---------- */
-  siteUrl:      "https://b0556734282.github.io/my"  // כשיהיה דומיין משלכם — להחליף כאן, וגם ב-robots.txt וב-sitemap.xml
+  // ⚠ הכתובת מופיעה גם בתגיות השיתוף שבראש index.html ו-donate.html
+  //   (og:url, og:image, canonical). הן חייבות להיות שם ככתובת מלאה,
+  //   כי הסורקים של וואטסאפ ופייסבוק לא מריצים JavaScript ולא רואים
+  //   את מה שהקובץ הזה מזריק. בהחלפת דומיין — לעדכן גם שם,
+  //   וגם ב-robots.txt וב-sitemap.xml.
+  siteUrl:      "https://b0556734282.github.io/my"
 };
