@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- ============================================================
+     מדיניות אבטחת תוכן (CSP)
+     ------------------------------------------------------------
+     ברירת המחדל היא "לא לטעון כלום" ('none'), ומעליה מותר במפורש
+     רק מה שהאתר באמת צריך — והכול מהאתר עצמו ('self').
+     המשמעות: גם אם מישהו יצליח להחדיר תגית סקריפט לעמוד,
+     הדפדפן פשוט יסרב להריץ אותה. אין סקריפטים חיצוניים,
+     אין גופנים מגוגל, אין מעקב ואין פרסומות.
+     ============================================================ -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src 'self' https://formspree.io https://*.formspree.io; frame-src 'none'; form-action 'self'; manifest-src 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
+<title>גלריית תמונות | מרכז התורה והחסד — כוללים, סיומים, מבחנים וקירוב</title>
+<meta name="description" content="גלריית התמונות של מרכז התורה והחסד: כוללי אברכים, שיעורים, מעמד סיום מסכת ביצה, מבחנים בגמרא ורש&quot;י ופעילות קירוב רחוקים.">
+<meta name="keywords" content="מרכז התורה והחסד, מרכז תורה וחסד, כולל אברכים בני ברק, תרומה לכולל, קירוב רחוקים, מבחנים גמרא רש&quot;י, מעיין דפומבדיתא, קו התורה, ביקור חולים, תרומה סעיף 46, עמותה תורנית">
+<meta name="theme-color" content="#12325a">
+<meta name="author" content="עמותת מרכז התורה והחסד">
+
+<!-- שיתוף ברשתות ובוואטסאפ -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="he_IL">
+<meta property="og:site_name" content="עמותת מרכז התורה והחסד">
+<meta property="og:title" content="עמותת מרכז התורה והחסד">
+<meta property="og:description" content="עולם חסד יבנה — שותפות אמת במרכז תורה וחסד: כוללים, מבחנים, קירוב רחוקים וקו התורה.">
+<meta property="og:url" content="https://b0556734282.github.io/my/gallery.html">
+<meta property="og:image" content="https://b0556734282.github.io/my/assets/img/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="אברכים לומדים בבית המדרש של העמותה">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://b0556734282.github.io/my/assets/img/og-image.jpg">
+
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://b0556734282.github.io/my/gallery.html">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/logo.jpg">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/style.css">
+
+
+<!-- ההגדרות ושכבת האבטחה נטענות ראשונות, לפני שהעמוד מצויר,
+     כדי שההגנה מפני הטמעה באתר זר תפעל עוד לפני שמוצג תוכן. -->
+<script src="assets/js/config.js"></script>
+<script src="assets/js/security.js"></script>
+<script src="assets/js/apply-config.js" defer></script>
+<script src="assets/js/main.js" defer></script>
+<script src="assets/js/gallery.js" defer></script>
+</head>
+<body>
+
+<a class="skip-link" href="#main">דילוג לתוכן הראשי</a>
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<!-- ==================== תפריט עליון ==================== -->
+<header class="site-header scrolled" id="siteHeader">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true"><img src="assets/img/logo.jpg" alt="" width="46" height="46"></span>
+      <span class="brand-text">
+        <strong data-cfg="orgName">מרכז התורה והחסד</strong>
+        <small data-cfg="orgTagline">הפצת תורה • חינוך • קירוב</small>
+        <small class="hebrew-date" id="hebrewDate" hidden></small>
+      </span>
+    </a>
+
+    <div class="header-tools">
+      <button class="theme-toggle" type="button" aria-pressed="false" aria-label="מעבר לתצוגה כהה" title="תצוגה כהה" hidden>
+        <span class="icon-moon" aria-hidden="true">🌙</span>
+        <span class="icon-sun" aria-hidden="true">☀️</span>
+      </button>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mainNav" aria-label="פתיחת תפריט">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <nav class="main-nav" id="mainNav" aria-label="ניווט ראשי">
+      <ul>
+        <li><a href="index.html#about">אודות</a></li>
+        <li><a href="index.html#activities">המפעלות שלנו</a></li>
+        <li><a href="#impact">במספרים</a></li>
+        <li><a class="current" href="gallery.html" aria-current="page">גלריה</a></li>
+        <li><a href="index.html#faq">שאלות ותשובות</a></li>
+        <li><a href="index.html#contact">צור קשר</a></li>
+        <li><a class="btn btn-gold btn-sm" href="donate.html">לתרומה</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="section page-hero" id="top">
+  <div class="wrap">
+    <header class="section-head">
+      <p class="eyebrow">במפעלות רבבות</p>
+      <h1>גלריית התמונות</h1>
+      <p class="section-sub">הצצה קטנה מחלק מפעלות מרכז "תורה וחסד" — 41 תמונות מהשטח. לחיצה על תמונה מגדילה אותה.</p>
+    </header>
+
+    <div class="gallery-filters" role="group" aria-label="סינון לפי נושא">
+      <button type="button" data-filter="all" aria-pressed="true">הכול</button>
+      <button type="button" data-filter="kollel" aria-pressed="false">כוללים ושיעורים</button>
+      <button type="button" data-filter="siyum" aria-pressed="false">סיומים ומתנות</button>
+      <button type="button" data-filter="mivchanim" aria-pressed="false">מבחנים</button>
+      <button type="button" data-filter="kiruv" aria-pressed="false">קירוב רחוקים</button>
+    </div>
+
+    <div class="gallery">
+      <h2 class="gallery-group-title" data-cat="kollel">כוללי האברכים והשיעורים</h2>
+      <figure data-cat="kollel">
+        <img src="assets/img/gallery/kollel-01.jpg" alt="אברכי הכולל שוקדים על תלמודם" width="1400" height="788" loading="lazy" decoding="async">
+        <figcaption>אברכי הכולל שוקדים על תלמודם</figcaption>
+      </figure>
+      <figure data-cat="kollel">
+        <img src="assets/img/gallery/kollel-02.jpg" alt="סדר לימוד בכולל" width="1400" height="860" loading="lazy" decoding="async">
+        <figcaption>סדר לימוד בכולל</figcaption>
+      </figure>
+      <figure data-cat="kollel">
+        <img src="assets/img/gallery/kollel-03.jpg" alt="בית המדרש מלא לומדים" width="1400" height="866" loading="lazy" decoding="async">
+        <figcaption>בית המדרש מלא לומדים</figcaption>
+      </figure>
+      <figure data-cat="kollel">
+        <img src="assets/img/gallery/kollel-04.jpg" alt="שקידה בבית המדרש" width="1400" height="828" loading="lazy" decoding="async">
+        <figcaption>שקידה בבית המדרש</figcaption>
+      </figure>
+      <figure data-cat="kollel">
+        <img src="assets/img/gallery/kollel-05.jpg" alt="לימוד בעיון" width="1318" height="989" loading="lazy" decoding="async">
+        <figcaption>לימוד בעיון</figcaption>
+      </figure>
+      <figure data-cat="kollel">
+        <img src="assets/img/gallery/kollel-06.jpg" alt="אברך בלימודו" width="1003" height="773" loading="lazy" decoding="async">
+        <figcaption>אברך בלימודו</figcaption>
+      </figure>
+      <figure data-cat="kollel">
+        <img src="assets/img/gallery/shiur-01.jpg" alt="שיעור מפי הגה&quot;ח ר' יחזקאל דרברמדיקר שליט&quot;א" width="1238" height="989" loading="lazy" decoding="async">
+        <figcaption>שיעור מפי הגה"ח ר' יחזקאל דרברמדיקר שליט"א</figcaption>
+      </figure>
+      <figure data-cat="kollel">
+        <img src="assets/img/gallery/shiur-02.jpg" alt="השיעור בכולל" width="1400" height="745" loading="lazy" decoding="async">
+        <figcaption>השיעור בכולל</figcaption>
+      </figure>
+      <figure data-cat="kollel">
+        <img src="assets/img/gallery/chavruta-01.jpg" alt="לימוד בחברותא" width="1400" height="823" loading="lazy" decoding="async">
+        <figcaption>לימוד בחברותא</figcaption>
+      </figure>
+      <figure data-cat="kollel">
+        <img src="assets/img/gallery/chavruta-02.jpg" alt="דיון בסוגיא" width="1242" height="989" loading="lazy" decoding="async">
+        <figcaption>דיון בסוגיא</figcaption>
+      </figure>
+      <figure data-cat="kollel">
+        <img src="assets/img/gallery/boker-01.jpg" alt="כולל בוקר" width="1400" height="871" loading="lazy" decoding="async">
+        <figcaption>כולל בוקר</figcaption>
+      </figure>
+      <figure data-cat="kollel">
+        <img src="assets/img/gallery/boker-02.jpg" alt="כולל בוקר — סדר לימוד" width="1318" height="804" loading="lazy" decoding="async">
+        <figcaption>כולל בוקר — סדר לימוד</figcaption>
+      </figure>
+      <figure data-cat="kollel">
+        <img src="assets/img/gallery/boker-03.jpg" alt="כולל בוקר" width="912" height="702" loading="lazy" decoding="async">
+        <figcaption>כולל בוקר</figcaption>
+      </figure>
+      <figure data-cat="kollel">
+        <img src="assets/img/gallery/boker-04.jpg" alt="חברותא בכולל בוקר" width="912" height="702" loading="lazy" decoding="async">
+        <figcaption>חברותא בכולל בוקר</figcaption>
+      </figure>
+      <figure data-cat="kollel">
+        <img src="assets/img/gallery/boker-05.jpg" alt="כולל בוקר" width="912" height="702" loading="lazy" decoding="async">
+        <figcaption>כולל בוקר</figcaption>
+      </figure>
+      <h2 class="gallery-group-title" data-cat="siyum">מעמדי סיום ומתנות</h2>
+      <figure data-cat="siyum">
+        <img src="assets/img/gallery/siyum-01.jpg" alt="סעודת סיום מסכת ביצה" width="1318" height="989" loading="lazy" decoding="async">
+        <figcaption>סעודת סיום מסכת ביצה</figcaption>
+      </figure>
+      <figure data-cat="siyum">
+        <img src="assets/img/gallery/siyum-02.jpg" alt="אברכי הכולל במעמד הסיום" width="1400" height="695" loading="lazy" decoding="async">
+        <figcaption>אברכי הכולל במעמד הסיום</figcaption>
+      </figure>
+      <figure data-cat="siyum">
+        <img src="assets/img/gallery/siyum-03.jpg" alt="שמחה של תורה" width="1267" height="947" loading="lazy" decoding="async">
+        <figcaption>שמחה של תורה</figcaption>
+      </figure>
+      <figure data-cat="siyum">
+        <img src="assets/img/gallery/siyum-04.jpg" alt="דברי תורה בסעודת הסיום" width="1318" height="989" loading="lazy" decoding="async">
+        <figcaption>דברי תורה בסעודת הסיום</figcaption>
+      </figure>
+      <figure data-cat="siyum">
+        <img src="assets/img/gallery/siyum-05.jpg" alt="ריקודים לכבוד התורה" width="1256" height="942" loading="lazy" decoding="async">
+        <figcaption>ריקודים לכבוד התורה</figcaption>
+      </figure>
+      <figure data-cat="siyum">
+        <img src="assets/img/gallery/siyum-06.jpg" alt="מעמד הסיום" width="1318" height="989" loading="lazy" decoding="async">
+        <figcaption>מעמד הסיום</figcaption>
+      </figure>
+      <figure data-cat="siyum">
+        <img src="assets/img/gallery/siyum-07.jpg" alt="מעמד הסיום" width="1318" height="989" loading="lazy" decoding="async">
+        <figcaption>מעמד הסיום</figcaption>
+      </figure>
+      <figure data-cat="siyum">
+        <img src="assets/img/gallery/siyum-08.jpg" alt="דברים במעמד הסיום" width="1050" height="1400" loading="lazy" decoding="async">
+        <figcaption>דברים במעמד הסיום</figcaption>
+      </figure>
+      <figure data-cat="siyum">
+        <img src="assets/img/gallery/matanot-01.jpg" alt="המתנות לאברכים" width="1040" height="644" loading="lazy" decoding="async">
+        <figcaption>המתנות לאברכים</figcaption>
+      </figure>
+      <h2 class="gallery-group-title" data-cat="mivchanim">מבחנים — "מעיין דפומבדיתא"</h2>
+      <figure data-cat="mivchanim">
+        <img src="assets/img/gallery/mivchan-01.jpg" alt="עשרות בחורים במבחן על דפי גמרא ורש&quot;י" width="1400" height="952" loading="lazy" decoding="async">
+        <figcaption>עשרות בחורים במבחן על דפי גמרא ורש"י</figcaption>
+      </figure>
+      <figure data-cat="mivchanim">
+        <img src="assets/img/gallery/mivchan-02.jpg" alt="בחורים נבחנים" width="1238" height="929" loading="lazy" decoding="async">
+        <figcaption>בחורים נבחנים</figcaption>
+      </figure>
+      <figure data-cat="mivchanim">
+        <img src="assets/img/gallery/mivchan-03.jpg" alt="שעת המבחן" width="1238" height="929" loading="lazy" decoding="async">
+        <figcaption>שעת המבחן</figcaption>
+      </figure>
+      <figure data-cat="mivchanim">
+        <img src="assets/img/gallery/mivchan-04.jpg" alt="בחור במבחן" width="1238" height="929" loading="lazy" decoding="async">
+        <figcaption>בחור במבחן</figcaption>
+      </figure>
+      <figure data-cat="mivchanim">
+        <img src="assets/img/gallery/mivchan-05.jpg" alt="טפסי המבחן" width="1050" height="1400" loading="lazy" decoding="async">
+        <figcaption>טפסי המבחן</figcaption>
+      </figure>
+      <figure data-cat="mivchanim">
+        <img src="assets/img/gallery/mivchan-06.jpg" alt="במבחן" width="1238" height="929" loading="lazy" decoding="async">
+        <figcaption>במבחן</figcaption>
+      </figure>
+      <figure data-cat="mivchanim">
+        <img src="assets/img/gallery/mivchan-07.jpg" alt="היכל המבחנים" width="1238" height="929" loading="lazy" decoding="async">
+        <figcaption>היכל המבחנים</figcaption>
+      </figure>
+      <figure data-cat="mivchanim">
+        <img src="assets/img/gallery/mivchan-poster.jpg" alt="מודעת מסלול המבחנים ללומדי גמרא רש&quot;י" width="1107" height="1400" loading="lazy" decoding="async">
+        <figcaption>מודעת מסלול המבחנים ללומדי גמרא רש"י</figcaption>
+      </figure>
+      <h2 class="gallery-group-title" data-cat="kiruv">קירוב רחוקים</h2>
+      <figure data-cat="kiruv">
+        <img src="assets/img/gallery/kiruv-01.jpg" alt="חברותא במסגרת הקירוב" width="1400" height="1050" loading="lazy" decoding="async">
+        <figcaption>חברותא במסגרת הקירוב</figcaption>
+      </figure>
+      <figure data-cat="kiruv">
+        <img src="assets/img/gallery/kiruv-02.jpg" alt="לימוד בבית הכנסת" width="1281" height="968" loading="lazy" decoding="async">
+        <figcaption>לימוד בבית הכנסת</figcaption>
+      </figure>
+      <figure data-cat="kiruv">
+        <img src="assets/img/gallery/kiruv-03.jpg" alt="חברותא אישית" width="1400" height="1311" loading="lazy" decoding="async">
+        <figcaption>חברותא אישית</figcaption>
+      </figure>
+      <figure data-cat="kiruv">
+        <img src="assets/img/gallery/kiruv-04.jpg" alt="לימוד עם מקורבים" width="1271" height="969" loading="lazy" decoding="async">
+        <figcaption>לימוד עם מקורבים</figcaption>
+      </figure>
+      <figure data-cat="kiruv">
+        <img src="assets/img/gallery/kiruv-05.jpg" alt="שיחה בגובה העיניים" width="1155" height="880" loading="lazy" decoding="async">
+        <figcaption>שיחה בגובה העיניים</figcaption>
+      </figure>
+      <figure data-cat="kiruv">
+        <img src="assets/img/gallery/kiruv-06.jpg" alt="לימוד בחברותא" width="1155" height="880" loading="lazy" decoding="async">
+        <figcaption>לימוד בחברותא</figcaption>
+      </figure>
+      <figure data-cat="kiruv">
+        <img src="assets/img/gallery/kiruv-07.jpg" alt="לימוד בחברותא" width="1155" height="880" loading="lazy" decoding="async">
+        <figcaption>לימוד בחברותא</figcaption>
+      </figure>
+      <figure data-cat="kiruv">
+        <img src="assets/img/gallery/kiruv-08.jpg" alt="חברותא בקירוב" width="1155" height="880" loading="lazy" decoding="async">
+        <figcaption>חברותא בקירוב</figcaption>
+      </figure>
+      <figure data-cat="kiruv">
+        <img src="assets/img/gallery/kiruv-09.jpg" alt="ערב לימוד בקירוב" width="1400" height="648" loading="lazy" decoding="async">
+        <figcaption>ערב לימוד בקירוב</figcaption>
+      </figure>
+    </div>
+
+    <div class="share-row">
+      <p class="share-label">רוצים להיות שותפים בפעילות?</p>
+      <a class="btn btn-gold" href="donate.html">לתרומה</a>
+      <button class="share-btn" type="button" data-share="whatsapp"><span aria-hidden="true">💬</span> שיתוף בוואטסאפ</button>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ==================== פוטר ==================== -->
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <strong class="footer-brand" data-cfg="orgName">מרכז התורה והחסד</strong>
+      <p>הפצת תורה, חינוך וקירוב לבבות.</p>
+      <p class="amuta" data-cfg-if="amutaNumber">עמותה רשומה מס' <span data-cfg="amutaNumber"></span></p>
+      <ul class="footer-contact">
+        <li data-cfg-if="phone"><a data-cfg-href="phone" href="#"><span data-cfg="phone"></span></a></li>
+        <li data-cfg-if="email"><a data-cfg-href="email" href="#"><span data-cfg="email"></span></a></li>
+        <li data-cfg-if="address"><span data-cfg="address"></span></li>
+      </ul>
+    </div>
+    <nav aria-label="ניווט תחתון">
+      <a href="index.html#about">אודות</a>
+      <a href="index.html#activities">פעילות</a>
+      <a href="gallery.html">גלריה</a>
+      <a href="index.html#faq">שאלות ותשובות</a>
+      <a href="donate.html">תרומה</a>
+      <a href="index.html#contact">צור קשר</a>
+    </nav>
+    <p class="copy">© <span id="year">2026</span> כל הזכויות שמורות.</p>
+  </div>
+</footer>
+
+<a class="float-donate" href="donate.html" aria-label="מעבר לעמוד התרומות">לתרומה ❤</a>
+<button class="back-to-top" id="backToTop" type="button" aria-label="חזרה לראש העמוד">↑</button>
+
+</body>
+</html>

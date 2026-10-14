@@ -427,15 +427,20 @@
       document.body.appendChild(lightbox);
 
       closeBtn.addEventListener("click", closeLightbox);
-      prevBtn.addEventListener("click", function () { showImage(lbIndex - 1); });
+      prevBtn.addEventListener("click", function () { showImage(lbIndex - 1, -1); });
       nextBtn.addEventListener("click", function () { showImage(lbIndex + 1); });
       lightbox.addEventListener("click", function (e) {
         if (e.target === lightbox || e.target === inner) closeLightbox();
       });
     };
 
-    var showImage = function (index) {
+    var showImage = function (index, step) {
       lbIndex = (index + figures.length) % figures.length;
+      // בעמוד הגלריה חלק מהתמונות מוסתרות בסינון — מדלגים עליהן בניווט
+      var guard = figures.length;
+      while (figures[lbIndex].hidden && guard-- > 0) {
+        lbIndex = (lbIndex + (step || 1) + figures.length) % figures.length;
+      }
       var fig = figures[lbIndex];
       var img = fig.querySelector("img");
       var cap = fig.querySelector("figcaption");
@@ -482,8 +487,8 @@
       if (!lightbox || lightbox.hidden) return;
       if (e.key === "Escape") closeLightbox();
       // RTL: החץ שמאלה מתקדם קדימה
-      if (e.key === "ArrowLeft")  showImage(lbIndex + 1);
-      if (e.key === "ArrowRight") showImage(lbIndex - 1);
+      if (e.key === "ArrowLeft")  showImage(lbIndex + 1, 1);
+      if (e.key === "ArrowRight") showImage(lbIndex - 1, -1);
     });
   }
 

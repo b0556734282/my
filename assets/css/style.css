@@ -844,6 +844,7 @@ html[data-framed="true"] body::before {
 .gallery figure.zoomable { cursor: zoom-in; }
 .gallery img {
   width: 100%;
+  height: auto;
   aspect-ratio: 4 / 3;
   object-fit: cover;
   transition: transform .5s var(--ease);
@@ -1372,3 +1373,179 @@ html.js .reveal.visible { opacity: 1; transform: none; }
   a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 9pt; color: #555; }
   html.js .reveal { opacity: 1 !important; transform: none !important; }
 }
+
+/* ============================================================
+   תמונת רקע אמיתית בכותרת הראשית
+   ============================================================ */
+.hero-bg.hero-photo {
+  background:
+    linear-gradient(100deg, rgba(8, 22, 42, .94) 0%, rgba(12, 35, 66, .84) 45%, rgba(12, 35, 66, .45) 100%),
+    url("../img/gallery/kollel-01.jpg") center / cover no-repeat;
+}
+.hero-bg.hero-photo::after { opacity: .07; }
+
+/* ============================================================
+   מפעלות — תפריט קפיצה, שורות תמונה+טקסט, קו התורה
+   ============================================================ */
+.act-index {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: -16px auto 56px;
+}
+.act-index a {
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  color: var(--ink);
+  font-weight: 600;
+  font-size: .95rem;
+  transition: background .2s var(--ease), border-color .2s var(--ease), transform .2s var(--ease);
+}
+.act-index a:hover { text-decoration: none; border-color: var(--gold); background: var(--warn-bg); transform: translateY(-2px); }
+
+.feature {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(28px, 5vw, 64px);
+  align-items: center;
+  margin-bottom: clamp(56px, 8vw, 96px);
+  scroll-margin-top: calc(var(--header-h) + 20px);
+}
+.feature.flip .feature-media { order: 2; }
+
+.feature-media { position: relative; }
+.feature-media > img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+.feature-media::before {
+  content: "";
+  position: absolute;
+  inset: 18px -18px -18px 18px;
+  border: 2px solid var(--gold);
+  border-radius: var(--radius-lg);
+  z-index: -1;
+  opacity: .55;
+}
+.feature-thumbs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 10px;
+}
+.feature-thumbs img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow);
+}
+
+.feature-tag {
+  display: inline-block;
+  font-size: .85rem;
+  font-weight: 700;
+  letter-spacing: .02em;
+  color: var(--gold-deep);
+  background: var(--warn-bg);
+  border-radius: 999px;
+  padding: 4px 14px;
+  margin-bottom: 14px;
+}
+.feature-tag.light { color: #0c2342; background: var(--gold-light); }
+.feature-body h3 { font-size: clamp(1.45rem, 2.6vw, 1.95rem); margin-bottom: .35em; }
+.feature-quote {
+  font-family: "Frank Ruhl Libre", serif;
+  font-size: 1.15rem;
+  color: var(--brand-soft);
+  border-inline-start: 3px solid var(--gold);
+  padding-inline-start: 14px;
+  margin: 0 0 1em;
+}
+.feature-points { list-style: none; padding: 0; margin: 0 0 1.4em; display: flex; flex-wrap: wrap; gap: 8px; }
+.feature-points li {
+  font-size: .9rem;
+  font-weight: 600;
+  padding: 5px 13px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--ink);
+}
+
+.kav-band {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 28px;
+  align-items: center;
+  padding: clamp(28px, 4vw, 44px);
+  border-radius: var(--radius-lg);
+  margin-bottom: clamp(56px, 8vw, 96px);
+  color: var(--on-dark-muted);
+  background:
+    radial-gradient(600px 260px at 10% 0%, rgba(200, 162, 74, .28), transparent 65%),
+    linear-gradient(140deg, var(--brand-dark), var(--brand-soft));
+  box-shadow: var(--shadow-lg);
+  scroll-margin-top: calc(var(--header-h) + 20px);
+}
+.kav-band h3 { color: #fff; font-size: clamp(1.35rem, 2.4vw, 1.8rem); }
+.kav-band b { color: var(--gold-light); }
+.kav-band p:last-child { margin-bottom: 0; }
+.kav-icon {
+  width: 78px; height: 78px;
+  display: grid; place-items: center;
+  font-size: 2.2rem;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, .1);
+  border: 1px solid rgba(255, 255, 255, .2);
+}
+.kav-call { flex-direction: column; gap: 2px; padding: 16px 28px; white-space: nowrap; }
+.kav-num { font-size: 1.45rem; font-weight: 800; direction: ltr; }
+.kav-sub { font-size: .82rem; font-weight: 600; opacity: .85; }
+
+#act-more { scroll-margin-top: calc(var(--header-h) + 20px); }
+
+.gallery-more { text-align: center; margin: 34px 0 0; }
+
+@media (max-width: 860px) {
+  .feature { grid-template-columns: 1fr; }
+  .feature.flip .feature-media { order: 0; }
+  .feature-media::before { display: none; }
+  .kav-band { grid-template-columns: 1fr; text-align: center; }
+  .kav-icon { margin-inline: auto; }
+}
+
+/* ============================================================
+   עמוד הגלריה — סינון לפי נושא
+   ============================================================ */
+.gallery-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 0 30px;
+}
+.gallery-filters button {
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  color: var(--ink);
+  transition: background .2s var(--ease), border-color .2s var(--ease);
+}
+.gallery-filters button:hover { border-color: var(--gold); }
+.gallery-filters button[aria-pressed="true"] { background: var(--brand); border-color: var(--brand); color: #fff; }
+.gallery figure[hidden] { display: none; }
+.gallery-group-title { grid-column: 1 / -1; margin: 18px 0 0; font-size: 1.3rem; }
+.gallery-group-title[hidden] { display: none; }
+.page-hero { padding-top: calc(var(--header-h) + 50px); }
